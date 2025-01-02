@@ -1,10 +1,25 @@
 import React from 'react';
-import { StyleSheet, View, Image } from 'react-native';
+import { useAccount } from 'wagmi';
 import { ThemedText } from '@/components/ThemedText';
+import { StyleSheet, View, Image } from 'react-native';
 import { AppKitButton, useWalletInfo } from '@reown/appkit-wagmi-react-native';
 
 export default function HomeScreen() {
   const { walletInfo } = useWalletInfo();
+  const account = useAccount();
+
+  let statusIndicator = '';
+
+  switch (account.status) {
+    case 'connected':
+      statusIndicator = '🟢';
+      break;
+    case 'reconnecting':
+      statusIndicator = '🟡';
+      break;
+    default:
+      statusIndicator = '';
+  }
 
   return (
     <View style={styles.container}>
@@ -21,6 +36,10 @@ export default function HomeScreen() {
           resizeMode='contain'
         />
       ) : null}
+
+      <ThemedText>
+        Status: {account.status} {statusIndicator}
+      </ThemedText>
 
       <View style={styles.buttonContainer}>
         <AppKitButton />

@@ -45,8 +45,9 @@ const wagmiConfig = defaultWagmiConfig({ chains, projectId, metadata });
 createAppKit({
   projectId,
   wagmiConfig,
-  defaultChain: mainnet, // Optional
-  enableAnalytics: true, // Optional - defaults to your Cloud configuration
+  defaultChain: mainnet,
+  enableAnalytics: true,
+  themeMode: 'light',
 });
 
 export default function RootLayout() {
