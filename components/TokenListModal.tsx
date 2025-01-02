@@ -1,66 +1,49 @@
+import { useState } from 'react';
+import { Token } from '@/types/tokenTypes';
 import {
-  View,
-  Text,
-  Modal,
-  Image,
   FlatList,
-  TextInput,
+  Image,
+  Modal,
   Pressable,
   StyleSheet,
+  Text,
+  TextInput,
+  View,
 } from 'react-native';
-import React, { useState } from 'react';
-import { Token, TokensList } from '@/types/token';
+import { SwapType } from '@/types/swapTypes';
+import { useSwapStore } from '@/store/swapStore';
+import tokensListData from '../data/tokensListData.json';
 
 type Props = {
-  type: 'buy' | 'sell';
-  data: TokensList;
-  defaultToken: string;
+  type: SwapType;
 };
 
-export default function SelectList({ type, data, defaultToken }: Props) {
-  const [modalVisible, setModalVisible] = useState(false);
-  const [selectedValue, setSelectedValue] = useState<Token | null>(null);
+export default function TokenListModal({ type }: Props) {
+  const isTokenListOpen = useSwapStore((state) => state.isTokenListOpen);
   const [searchQuery, setSearchQuery] = useState('');
 
-  const selectedDefaultToken = data.tokens.find(
-    (item) => item.symbol.toLowerCase() === defaultToken.toLowerCase()
-  );
-
   const filteredData = searchQuery
-    ? data.tokens.filter((item: Token) =>
+    ? tokensListData.tokens.filter((item) =>
         item.symbol.toLowerCase().includes(searchQuery.toLowerCase())
       )
-    : data.tokens;
+    : tokensListData.tokens;
 
   const handleSelect = (item: Token) => {
-    setSelectedValue(item);
-    setModalVisible(false);
+    useSwapStore.getState().setTokenByType(type, item);
+    useSwapStore.getState().openTokenList(false);
   };
 
   return (
     <View style={styles.container}>
-      <Pressable style={styles.selectBox} onPress={() => setModalVisible(true)}>
-        <Image
-          style={styles.icon}
-          resizeMode='contain'
-          source={{
-            uri: selectedValue?.logoURI || selectedDefaultToken?.logoURI || '',
-          }}
-        />
-        <Text style={styles.symbol}>
-          {selectedValue ? selectedValue.symbol : selectedDefaultToken?.symbol}
-        </Text>
-      </Pressable>
-
-      <Modal visible={modalVisible} animationType='fade' transparent={true}>
+      <Modal visible={isTokenListOpen} animationType='fade' transparent={true}>
         <View style={styles.modalOverlay}>
           <View style={styles.modalContent}>
-            <TextInput
+            {/* <TextInput
               style={styles.searchBox}
               placeholder='Search...'
               value={searchQuery}
-              onChangeText={setSearchQuery}
-            />
+              onChangeText={onSearchChange}
+            /> */}
 
             <FlatList
               data={filteredData}
@@ -87,7 +70,7 @@ export default function SelectList({ type, data, defaultToken }: Props) {
 
             <Pressable
               style={styles.closeButton}
-              onPress={() => setModalVisible(false)}
+              onPress={() => useSwapStore.getState().openTokenList(false)}
             >
               <Text style={styles.closeButtonText}>Close</Text>
             </Pressable>
@@ -100,20 +83,28 @@ export default function SelectList({ type, data, defaultToken }: Props) {
 
 const styles = StyleSheet.create({
   container: {},
+  modalOverlay: {
+    height: '100%',
+    width: '100%',
+    backgroundColor: 'rgba(0, 0, 0, 0.5)',
+  },
   selectBox: {
     flexDirection: 'row',
     alignItems: 'center',
     gap: 10,
     padding: 8,
     borderWidth: 1,
-    borderColor: '#fff',
+    borderColor: '#ccc',
     borderRadius: 8,
     backgroundColor: '#fff',
   },
-  modalOverlay: {
-    height: '100%',
-    width: '100%',
-    backgroundColor: 'rgba(0, 0, 0, 0.5)',
+  icon: {
+    width: 25,
+    height: 25,
+  },
+  symbol: {
+    fontSize: 16,
+    fontWeight: '600',
   },
   modalContent: {
     width: '100%',
@@ -134,10 +125,6 @@ const styles = StyleSheet.create({
     borderBottomWidth: 1,
     borderBottomColor: '#eee',
   },
-  optionText: {
-    fontSize: 16,
-    color: '#333',
-  },
   closeButton: {
     marginTop: 16,
     padding: 10,
@@ -152,20 +139,12 @@ const styles = StyleSheet.create({
     display: 'flex',
     flexDirection: 'column',
   },
-  icon: {
-    width: 25,
-    height: 25,
-  },
   rowContainer: {
     width: 100,
     display: 'flex',
     flexDirection: 'row',
     alignItems: 'center',
     gap: 10,
-  },
-  symbol: {
-    fontSize: 16,
-    fontWeight: 600,
   },
   name: {
     fontSize: 12,

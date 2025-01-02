@@ -1,5 +1,8 @@
 import axios from 'axios';
-import { GetSwapPriceApiPayload, SwapPriceApiResponse } from '@/types/price';
+import {
+  GetSwapPriceApiPayload,
+  SwapPriceApiResponse,
+} from '@/types/priceTypes';
 
 const headers = {
   '0x-api-key': process.env.EXPO_PUBLIC_0X_API_KEY,
