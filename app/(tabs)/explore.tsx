@@ -1,20 +1,23 @@
+import {
+  useBuyToken,
+  useSellAmount,
+  useSellToken,
+  useSwapStore,
+} from '@/store/swapStore';
+import { useAccount } from 'wagmi';
+import { getSwapPrice } from '@/apis/swap';
+import TokenBox from '@/components/TokenBox';
 import { StyleSheet, View } from 'react-native';
 import { useQuery } from '@tanstack/react-query';
-import { getSwapPrice } from '@/apis/swap';
 import { SwapPriceApiResponse } from '@/types/priceTypes';
-import TokenListModal from '@/components/TokenListModal';
-import TokenBox from '@/components/TokenBox';
-import defaultTokensData from '../../data/defautTokensData.json';
-import { useSwapStore } from '@/store/swapStore';
-import { useWalletInfo } from '@reown/appkit-wagmi-react-native';
-import { useAccount } from 'wagmi';
+import SwapButton from '@/components/SwapButton';
 
 export default function SwapScreen() {
   useSwapStore.getState().setDefaultTokens();
 
-  const buyToken = useSwapStore((state) => state.getTokenByType('buy'));
-  const sellToken = useSwapStore((state) => state.getTokenByType('sell'));
-  const sellAmmount = useSwapStore.getState().getSellAmount();
+  const buyToken = useBuyToken();
+  const sellToken = useSellToken();
+  const sellAmmount = useSellAmount();
 
   const account = useAccount();
 
@@ -34,19 +37,20 @@ export default function SwapScreen() {
     sellAmount: '1000000',
   };
 
-  const swapPriceApiResponse = useQuery<SwapPriceApiResponse, Error>({
-    queryKey: ['swapPrice', params],
-    queryFn: () => getSwapPrice(params),
-  });
+  // const swapPriceApiResponse = useQuery<SwapPriceApiResponse, Error>({
+  //   queryKey: ['swapPrice', params],
+  //   queryFn: () => getSwapPrice(params),
+  // });
 
-  console.log(
-    'PRICE API status:' + swapPriceApiResponse.status,
-    swapPriceApiResponse.data
-  );
+  // console.log(
+  //   'PRICE API status:' + swapPriceApiResponse.status,
+  //   swapPriceApiResponse.data
+  // );
 
   return (
     <View style={styles.container}>
       <TokenBox type='sell' />
+      <SwapButton />
       <TokenBox type='buy' />
     </View>
   );
@@ -54,6 +58,7 @@ export default function SwapScreen() {
 
 const styles = StyleSheet.create({
   container: {
+    position: 'relative',
     height: '100%',
     backgroundColor: '#fff',
     flexDirection: 'column',

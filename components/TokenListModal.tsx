@@ -1,17 +1,21 @@
-import { useState } from 'react';
-import { Token } from '@/types/tokenTypes';
 import {
-  FlatList,
+  Text,
+  View,
   Image,
   Modal,
+  FlatList,
   Pressable,
   StyleSheet,
-  Text,
-  TextInput,
-  View,
 } from 'react-native';
+import {
+  useSwapStore,
+  useOpenTokenList,
+  useSetTokenByType,
+  useIsTokenListOpen,
+} from '@/store/swapStore';
+import { useState } from 'react';
+import { Token } from '@/types/tokenTypes';
 import { SwapType } from '@/types/swapTypes';
-import { useSwapStore } from '@/store/swapStore';
 import tokensListData from '../data/tokensListData.json';
 
 type Props = {
@@ -19,7 +23,10 @@ type Props = {
 };
 
 export default function TokenListModal({ type }: Props) {
-  const isTokenListOpen = useSwapStore((state) => state.isTokenListOpen);
+  const isTokenListOpen = useIsTokenListOpen();
+  const setTokenByType = useSetTokenByType();
+  const openTokenList = useOpenTokenList();
+
   const [searchQuery, setSearchQuery] = useState('');
 
   const filteredData = searchQuery
@@ -29,8 +36,8 @@ export default function TokenListModal({ type }: Props) {
     : tokensListData.tokens;
 
   const handleSelect = (item: Token) => {
-    useSwapStore.getState().setTokenByType(type, item);
-    useSwapStore.getState().openTokenList(false);
+    setTokenByType(type, item);
+    openTokenList(false);
   };
 
   return (

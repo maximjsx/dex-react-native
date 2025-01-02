@@ -1,21 +1,22 @@
 import { ThemedText } from './ThemedText';
 import { SwapType } from '@/types/swapTypes';
-import { useSwapStore } from '@/store/swapStore';
 import { Image, Pressable, StyleSheet } from 'react-native';
+import { useOpenTokenList, useTokenByType } from '@/store/swapStore';
 
 type Props = {
   type: SwapType;
 };
 
 export default function TokenSelect({ type }: Props) {
-  const token = useSwapStore((state) => state.getTokenByType(type));
+  const token = useTokenByType(type);
+  const openTokenList = useOpenTokenList();
 
   const hanldePress = () => {
-    useSwapStore.getState().openTokenList(true);
+    openTokenList(true);
   };
 
   return (
-    <Pressable style={styles.selectBox} onPress={hanldePress}>
+    <Pressable style={styles.container} onPress={hanldePress}>
       <Image
         style={styles.icon}
         resizeMode='contain'
@@ -29,7 +30,7 @@ export default function TokenSelect({ type }: Props) {
 }
 
 const styles = StyleSheet.create({
-  selectBox: {
+  container: {
     flexDirection: 'row',
     alignItems: 'center',
     gap: 10,

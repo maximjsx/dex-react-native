@@ -1,32 +1,29 @@
-import React, { useState } from 'react';
 import { TextInput, View, StyleSheet } from 'react-native';
+import { useSellAmount, useSetSellAmount } from '@/store/swapStore';
 
 export default function AmountInput() {
-  const [number, setNumber] = useState('');
+  const setSellAmount = useSetSellAmount();
+  const sellAmount = useSellAmount();
 
   const handleInputChange = (input: string) => {
     // Allow only numbers
     const sanitizedInput = input.replace(/[^0-9]/g, '');
-    setNumber(sanitizedInput);
+    setSellAmount(sanitizedInput);
   };
 
   return (
-    <View style={styles.container}>
-      <TextInput
-        value={number}
-        style={styles.input}
-        keyboardType='numeric'
-        placeholder='Enter amount'
-        onChangeText={handleInputChange}
-      />
-    </View>
+    <TextInput
+      value={sellAmount}
+      style={styles.input}
+      keyboardType='numeric'
+      placeholder='Enter amount'
+      onChangeText={handleInputChange}
+    />
   );
 }
 
 const styles = StyleSheet.create({
-  container: {},
   input: {
-    width: '100%',
     height: 45,
     fontSize: 20,
     fontWeight: 500,
