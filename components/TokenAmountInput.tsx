@@ -1,11 +1,17 @@
-import { TextInput, View, StyleSheet } from 'react-native';
+import { SwapType } from '@/types/swapTypes';
+import { TextInput, StyleSheet } from 'react-native';
 import { useSellAmount, useSetSellAmount } from '@/store/swapStore';
 
-export default function AmountInput() {
+type Props = {
+  type: SwapType;
+};
+
+export default function TokenAmountInput({ type }: Props) {
   const setSellAmount = useSetSellAmount();
   const sellAmount = useSellAmount();
 
   const handleInputChange = (input: string) => {
+    if (type === 'sell') return;
     // Allow only numbers
     const sanitizedInput = input.replace(/[^0-9]/g, '');
     setSellAmount(sanitizedInput);

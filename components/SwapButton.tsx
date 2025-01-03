@@ -1,10 +1,10 @@
 import { Pressable, StyleSheet } from 'react-native';
-import { ThemedText } from './ThemedText';
+import Ionicons from '@expo/vector-icons/Ionicons';
 
 export default function SwapButton() {
   return (
     <Pressable style={styles.button}>
-      <ThemedText style={styles.text}>Swap</ThemedText>
+      <Ionicons name='arrow-down' size={20} color='grey' />
     </Pressable>
   );
 }
@@ -15,17 +15,12 @@ const styles = StyleSheet.create({
     zIndex: 2,
     top: '49%',
     left: '50%',
-    borderWidth: 1,
-    backgroundColor: '#fff',
-    paddingTop: 4,
-    paddingLeft: 8,
-    paddingRight: 8,
-    paddingBottom: 4,
+    flexDirection: 'row',
+    alignItems: 'center',
+    padding: 8,
     borderRadius: 12,
+    borderWidth: 1,
     borderColor: '#f4f4f5',
-  },
-  text: {
-    color: '#518afe',
-    fontWeight: 500,
+    backgroundColor: '#fff',
   },
 });

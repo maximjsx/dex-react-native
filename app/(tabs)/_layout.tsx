@@ -3,7 +3,7 @@ import { Tabs } from 'expo-router';
 import { Platform } from 'react-native';
 import { Colors } from '@/constants/Colors';
 import { HapticTab } from '@/components/HapticTab';
-import { IconSymbol } from '@/components/ui/IconSymbol';
+import Ionicons from '@expo/vector-icons/Ionicons';
 import { useColorScheme } from '@/hooks/useColorScheme';
 import TabBarBackground from '@/components/ui/TabBarBackground';
 
@@ -31,7 +31,7 @@ export default function TabLayout() {
         options={{
           title: 'Wallet',
           tabBarIcon: ({ color }) => (
-            <IconSymbol size={28} name='house.fill' color={color} />
+            <Ionicons name='wallet-outline' size={20} color='grey' />
           ),
         }}
       />
@@ -40,7 +40,7 @@ export default function TabLayout() {
         options={{
           title: 'Swap',
           tabBarIcon: ({ color }) => (
-            <IconSymbol size={28} name='paperplane.fill' color={color} />
+            <Ionicons name='swap-vertical' size={20} color='grey' />
           ),
         }}
       />

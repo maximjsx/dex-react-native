@@ -1,9 +1,9 @@
 import React from 'react';
-import AmountInput from './AmountInput';
 import TokenSelect from './TokenSelect';
 import { SwapType } from '@/types/swapTypes';
 import TokenListModal from './TokenListModal';
 import { StyleSheet, View } from 'react-native';
+import TokenAmountInput from './TokenAmountInput';
 
 type Props = {
   type: SwapType;
@@ -14,7 +14,7 @@ export default function TokenBox({ type }: Props) {
     <React.Fragment>
       <View style={styles.container}>
         <TokenSelect type={type} />
-        <AmountInput />
+        <TokenAmountInput type={type} />
       </View>
       <TokenListModal type={type} />
     </React.Fragment>

@@ -1,7 +1,8 @@
 import { ThemedText } from './ThemedText';
 import { SwapType } from '@/types/swapTypes';
+import Ionicons from '@expo/vector-icons/Ionicons';
 import { Image, Pressable, StyleSheet } from 'react-native';
-import { useOpenTokenList, useTokenByType } from '@/store/swapStore';
+import { useOpenTokenListByType, useTokenByType } from '@/store/swapStore';
 
 type Props = {
   type: SwapType;
@@ -9,10 +10,10 @@ type Props = {
 
 export default function TokenSelect({ type }: Props) {
   const token = useTokenByType(type);
-  const openTokenList = useOpenTokenList();
+  const openTokenList = useOpenTokenListByType();
 
   const hanldePress = () => {
-    openTokenList(true);
+    openTokenList(type, true);
   };
 
   return (
@@ -25,6 +26,7 @@ export default function TokenSelect({ type }: Props) {
         }}
       />
       <ThemedText style={styles.symbol}>{token?.symbol}</ThemedText>
+      <Ionicons name='chevron-down' size={20} color='grey' />
     </Pressable>
   );
 }

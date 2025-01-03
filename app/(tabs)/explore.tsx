@@ -13,8 +13,6 @@ import { SwapPriceApiResponse } from '@/types/priceTypes';
 import SwapButton from '@/components/SwapButton';
 
 export default function SwapScreen() {
-  useSwapStore.getState().setDefaultTokens();
-
   const buyToken = useBuyToken();
   const sellToken = useSellToken();
   const sellAmmount = useSellAmount();

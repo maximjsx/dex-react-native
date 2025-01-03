@@ -8,12 +8,12 @@ import {
   StyleSheet,
 } from 'react-native';
 import {
-  useSwapStore,
-  useOpenTokenList,
+  isTokenListOpen,
   useSetTokenByType,
-  useIsTokenListOpen,
+  useOpenTokenListByType,
 } from '@/store/swapStore';
 import { useState } from 'react';
+import TokenSearch from './TokenSearch';
 import { Token } from '@/types/tokenTypes';
 import { SwapType } from '@/types/swapTypes';
 import tokensListData from '../data/tokensListData.json';
@@ -23,9 +23,9 @@ type Props = {
 };
 
 export default function TokenListModal({ type }: Props) {
-  const isTokenListOpen = useIsTokenListOpen();
+  const isOpen = isTokenListOpen(type);
   const setTokenByType = useSetTokenByType();
-  const openTokenList = useOpenTokenList();
+  const openTokenList = useOpenTokenListByType();
 
   const [searchQuery, setSearchQuery] = useState('');
 
@@ -37,20 +37,19 @@ export default function TokenListModal({ type }: Props) {
 
   const handleSelect = (item: Token) => {
     setTokenByType(type, item);
-    openTokenList(false);
+    openTokenList(type, false);
+  };
+
+  const handleClose = () => {
+    openTokenList(type, false);
   };
 
   return (
     <View style={styles.container}>
-      <Modal visible={isTokenListOpen} animationType='fade' transparent={true}>
+      <Modal visible={isOpen} animationType='fade' transparent={true}>
         <View style={styles.modalOverlay}>
           <View style={styles.modalContent}>
-            {/* <TextInput
-              style={styles.searchBox}
-              placeholder='Search...'
-              value={searchQuery}
-              onChangeText={onSearchChange}
-            /> */}
+            <TokenSearch query={searchQuery} onChange={setSearchQuery} />
 
             <FlatList
               data={filteredData}
@@ -75,10 +74,7 @@ export default function TokenListModal({ type }: Props) {
               )}
             />
 
-            <Pressable
-              style={styles.closeButton}
-              onPress={() => useSwapStore.getState().openTokenList(false)}
-            >
+            <Pressable style={styles.closeButton} onPress={handleClose}>
               <Text style={styles.closeButtonText}>Close</Text>
             </Pressable>
           </View>
