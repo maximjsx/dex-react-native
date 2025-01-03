@@ -1,7 +1,6 @@
 import { create } from 'zustand';
 import { Token } from '@/types/tokenTypes';
 import { SwapType } from '@/types/swapTypes';
-import defaultSelectedTokensData from '../data/defautTokensData.json';
 
 interface SwapState {
   sellToken: Token | null;
@@ -9,7 +8,7 @@ interface SwapState {
   sellAmount: string;
   isTokenListOpen: { sell: boolean; buy: boolean };
   setTokenByType: (type: SwapType, token: Token) => void;
-  setDefaultTokens: () => void;
+  setDefaultTokens: (defaultPair: Token[]) => void;
   setSellAmount: (amount: string) => void;
   openTokenListByType: (type: SwapType, open: boolean) => void;
 }
@@ -17,18 +16,18 @@ interface SwapState {
 export const useSwapStore = create<SwapState>((set) => ({
   sellToken: null,
   buyToken: null,
-  sellAmount: '0.1',
+  sellAmount: '1',
   isTokenListOpen: { sell: false, buy: false },
   setTokenByType: (type, token) =>
     set((state) => ({
       ...state,
       [type === 'buy' ? 'buyToken' : 'sellToken']: token,
     })),
-  setDefaultTokens: () =>
+  setDefaultTokens: (defaultPair) =>
     set((state) => ({
       ...state,
-      sellToken: defaultSelectedTokensData.tokens[0],
-      buyToken: defaultSelectedTokensData.tokens[1],
+      sellToken: defaultPair[0],
+      buyToken: defaultPair[1],
     })),
   setSellAmount: (sellAmount) => set((state) => ({ ...state, sellAmount })),
   openTokenListByType: (type, open) =>
@@ -39,8 +38,6 @@ export const useSwapStore = create<SwapState>((set) => ({
       },
     })),
 }));
-
-useSwapStore.getState().setDefaultTokens(); // Set initial default selected tokens
 
 // Selectors
 export const useTokenByType = (type: SwapType) =>
@@ -56,9 +53,9 @@ export const useSellAmount = () => useSwapStore((state) => state.sellAmount);
 // Actions
 export const useSetTokenByType = () =>
   useSwapStore((state) => state.setTokenByType);
-export const useSetDefaultTokens = () =>
-  useSwapStore((state) => state.setDefaultTokens);
 export const useSetSellAmount = () =>
   useSwapStore((state) => state.setSellAmount);
 export const useOpenTokenListByType = () =>
   useSwapStore((state) => state.openTokenListByType);
+export const useSetDefaultTokens = () =>
+  useSwapStore((state) => state.setDefaultTokens);

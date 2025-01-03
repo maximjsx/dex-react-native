@@ -1,10 +1,6 @@
 export interface TokensList {
-  name: string;
-  timestamp: string;
-  version: TokenVersion;
-  keywords: string[];
+  defaultPair: Token[];
   tokens: Token[];
-  logoURI: string;
 }
 
 export interface TokenVersion {

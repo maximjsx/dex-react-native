@@ -14,15 +14,15 @@ import {
 } from '@/store/swapStore';
 import { useState } from 'react';
 import TokenSearch from './TokenSearch';
-import { Token } from '@/types/tokenTypes';
 import { SwapType } from '@/types/swapTypes';
-import tokensListData from '../data/tokensListData.json';
+import { Token, TokensList } from '@/types/tokenTypes';
 
 type Props = {
   type: SwapType;
+  data: TokensList;
 };
 
-export default function TokenListModal({ type }: Props) {
+export default function TokenListModal({ type, data }: Props) {
   const isOpen = isTokenListOpen(type);
   const setTokenByType = useSetTokenByType();
   const openTokenList = useOpenTokenListByType();
@@ -30,10 +30,10 @@ export default function TokenListModal({ type }: Props) {
   const [searchQuery, setSearchQuery] = useState('');
 
   const filteredData = searchQuery
-    ? tokensListData.tokens.filter((item) =>
+    ? data.tokens.filter((item) =>
         item.symbol.toLowerCase().includes(searchQuery.toLowerCase())
       )
-    : tokensListData.tokens;
+    : data.tokens;
 
   const handleSelect = (item: Token) => {
     setTokenByType(type, item);

@@ -11,7 +11,7 @@ export default function TokenAmountInput({ type }: Props) {
   const sellAmount = useSellAmount();
 
   const handleInputChange = (input: string) => {
-    if (type === 'sell') return;
+    if (type === 'buy') return;
     // Allow only numbers
     const sanitizedInput = input.replace(/[^0-9]/g, '');
     setSellAmount(sanitizedInput);
@@ -22,8 +22,9 @@ export default function TokenAmountInput({ type }: Props) {
       value={sellAmount}
       style={styles.input}
       keyboardType='numeric'
-      placeholder='Enter amount'
+      editable={type === 'sell'}
       onChangeText={handleInputChange}
+      placeholder={type === 'sell' ? 'Enter amount' : ''}
     />
   );
 }
