@@ -2,18 +2,19 @@ import TokenSelect from './TokenSelect';
 import { SwapType } from '@/types/swapTypes';
 import { StyleSheet, View } from 'react-native';
 import TokenAmountInput from './TokenAmountInput';
-import { TokensList } from '@/types/tokenTypes';
+import { UseQueryResult } from '@tanstack/react-query';
+import { SwapPriceApiResponse } from '@/types/priceTypes';
 
 type Props = {
   type: SwapType;
-  data: TokensList;
+  price: UseQueryResult<SwapPriceApiResponse, Error>;
 };
 
-export default function TokenBox({ type, data }: Props) {
+export default function TokenBox({ type, price }: Props) {
   return (
     <View style={styles.container}>
       <TokenSelect type={type} />
-      <TokenAmountInput type={type} />
+      <TokenAmountInput type={type} buyAmount={price.data?.buyAmount} />
     </View>
   );
 }

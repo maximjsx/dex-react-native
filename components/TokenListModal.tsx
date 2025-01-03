@@ -43,14 +43,15 @@ export default function TokenListModal({ data }: Props) {
   };
 
   const handleClose = () => {
+    setSearchQuery('');
     openTokenList(type, false);
   };
 
   return (
     <Modal
-      visible={tokenListOpen.buy || tokenListOpen.sell}
-      animationType='fade'
       transparent={true}
+      animationType='fade'
+      visible={tokenListOpen.buy || tokenListOpen.sell}
     >
       <View style={styles.modalContent}>
         <TokenSearch query={searchQuery} onChange={setSearchQuery} />
@@ -131,13 +132,11 @@ const styles = StyleSheet.create({
     textAlign: 'center',
   },
   rowContainer: {
-    width: 100,
-    display: 'flex',
     flexDirection: 'row',
     alignItems: 'center',
     gap: 10,
   },
   name: {
-    fontSize: 12,
+    fontSize: 16,
   },
 });

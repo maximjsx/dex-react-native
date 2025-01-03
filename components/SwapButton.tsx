@@ -1,26 +1,22 @@
-import { Pressable, StyleSheet } from 'react-native';
-import Ionicons from '@expo/vector-icons/Ionicons';
+import { Pressable, StyleSheet, Text } from 'react-native';
 
 export default function SwapButton() {
   return (
     <Pressable style={styles.button}>
-      <Ionicons name='arrow-down' size={20} color='grey' />
+      <Text style={styles.text}>Swap</Text>
     </Pressable>
   );
 }
 
 const styles = StyleSheet.create({
   button: {
-    position: 'absolute',
-    zIndex: 2,
-    top: '49%',
-    left: '50%',
-    flexDirection: 'row',
-    alignItems: 'center',
-    padding: 8,
-    borderRadius: 12,
-    borderWidth: 1,
-    borderColor: '#f4f4f5',
-    backgroundColor: '#fff',
+    padding: 12,
+    backgroundColor: '#007BFF',
+    borderRadius: 8,
+  },
+  text: {
+    fontSize: 16,
+    color: '#fff',
+    textAlign: 'center',
   },
 });

@@ -16,7 +16,7 @@ export default function useGetSwapPrice() {
     sellAmount: sellAmmount,
   };
 
-  const swapPriceApiResponse = useQuery({
+  return useQuery({
     queryKey: ['swapPrice', priceQueryParams],
     queryFn: () => getSwapPrice(priceQueryParams),
     enabled:
@@ -24,9 +24,4 @@ export default function useGetSwapPrice() {
       !!priceQueryParams.buyToken &&
       !!priceQueryParams.sellAmount,
   });
-
-  console.log(
-    'PRICE API status:' + swapPriceApiResponse.status,
-    swapPriceApiResponse.data
-  );
 }

@@ -4,9 +4,10 @@ import { useSellAmount, useSetSellAmount } from '@/store/swapStore';
 
 type Props = {
   type: SwapType;
+  buyAmount: string | undefined;
 };
 
-export default function TokenAmountInput({ type }: Props) {
+export default function TokenAmountInput({ type, buyAmount }: Props) {
   const isSellType = type === 'sell';
 
   const setSellAmount = useSetSellAmount();
@@ -23,11 +24,10 @@ export default function TokenAmountInput({ type }: Props) {
   return (
     <TextInput
       style={styles.input}
-      keyboardType='numeric'
       editable={isSellType}
+      keyboardType='numeric'
       onChangeText={handleInputChange}
-      value={isSellType ? sellAmount : ''}
-      placeholder={isSellType ? 'Enter amount' : ''}
+      value={isSellType ? sellAmount : buyAmount || '0'}
     />
   );
 }
