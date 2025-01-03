@@ -1,37 +1,13 @@
-import {
-  useBuyToken,
-  useSellToken,
-  useSellAmount,
-  useSetDefaultTokens,
-} from '@/store/swapStore';
 import { useAccount } from 'wagmi';
-import { useEffect, useMemo } from 'react';
 import { getSwapPrice } from '@/apis/swap';
 import { useQuery } from '@tanstack/react-query';
-import polygonTokenListData from '../data/polygonTokensListData.json';
-import ethereumTokenListData from '../data/ethereumTokensListData.json';
+import { useBuyToken, useSellToken, useSellAmount } from '@/store/swapStore';
 
-export default function useInitSwap() {
+export default function useGetSwapPrice() {
   const account = useAccount();
   const buyToken = useBuyToken();
   const sellToken = useSellToken();
   const sellAmmount = useSellAmount();
-  const setDefaultTokens = useSetDefaultTokens();
-
-  const tokensList = useMemo(() => {
-    if (account.chainId === 1) {
-      return ethereumTokenListData;
-    }
-    if (account.chainId === 137) {
-      return polygonTokenListData;
-    }
-  }, [account.chainId]);
-
-  useEffect(() => {
-    if (tokensList) {
-      setDefaultTokens(tokensList.defaultPair);
-    }
-  }, [tokensList]);
 
   const priceQueryParams = {
     chainId: account.chainId as number,
@@ -53,6 +29,4 @@ export default function useInitSwap() {
     'PRICE API status:' + swapPriceApiResponse.status,
     swapPriceApiResponse.data
   );
-
-  return { tokensList };
 }

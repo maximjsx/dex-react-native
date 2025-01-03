@@ -1,29 +1,31 @@
 import {
   Text,
   View,
-  Image,
   Modal,
+  Image,
   FlatList,
   Pressable,
   StyleSheet,
 } from 'react-native';
 import {
-  isTokenListOpen,
+  useTokenListOpen,
   useSetTokenByType,
   useOpenTokenListByType,
 } from '@/store/swapStore';
 import { useState } from 'react';
 import TokenSearch from './TokenSearch';
-import { SwapType } from '@/types/swapTypes';
 import { Token, TokensList } from '@/types/tokenTypes';
 
 type Props = {
-  type: SwapType;
   data: TokensList;
 };
 
-export default function TokenListModal({ type, data }: Props) {
-  const isOpen = isTokenListOpen(type);
+const ITEM_HEIGHT = 70;
+
+export default function TokenListModal({ data }: Props) {
+  const tokenListOpen = useTokenListOpen();
+  const type = tokenListOpen.buy ? 'buy' : 'sell';
+
   const setTokenByType = useSetTokenByType();
   const openTokenList = useOpenTokenListByType();
 
@@ -45,62 +47,50 @@ export default function TokenListModal({ type, data }: Props) {
   };
 
   return (
-    <View style={styles.container}>
-      <Modal visible={isOpen} animationType='fade' transparent={true}>
-        <View style={styles.modalOverlay}>
-          <View style={styles.modalContent}>
-            <TokenSearch query={searchQuery} onChange={setSearchQuery} />
+    <Modal
+      visible={tokenListOpen.buy || tokenListOpen.sell}
+      animationType='fade'
+      transparent={true}
+    >
+      <View style={styles.modalContent}>
+        <TokenSearch query={searchQuery} onChange={setSearchQuery} />
 
-            <FlatList
-              data={filteredData}
-              keyExtractor={(item) => item.address}
-              renderItem={({ item }) => (
-                <Pressable
-                  style={styles.option}
-                  onPress={() => handleSelect(item)}
-                >
-                  <View style={styles.rowContainer}>
-                    <Image
-                      style={styles.icon}
-                      resizeMode='contain'
-                      source={{ uri: item.logoURI }}
-                    />
-                    <View style={styles.column}>
-                      <Text style={styles.symbol}>{item.symbol}</Text>
-                      <Text style={styles.name}>{item.name}</Text>
-                    </View>
-                  </View>
-                </Pressable>
-              )}
-            />
-
-            <Pressable style={styles.closeButton} onPress={handleClose}>
-              <Text style={styles.closeButtonText}>Close</Text>
+        <FlatList
+          data={filteredData}
+          keyExtractor={(item) => item.symbol}
+          renderItem={({ item }) => (
+            <Pressable style={styles.option} onPress={() => handleSelect(item)}>
+              <View style={styles.rowContainer}>
+                <Image
+                  style={styles.icon}
+                  resizeMode='contain'
+                  source={{ uri: item.logoURI }}
+                />
+                <Text style={styles.symbol}>{item.symbol}</Text>
+                <Text style={styles.name}>{item.name}</Text>
+              </View>
             </Pressable>
-          </View>
-        </View>
-      </Modal>
-    </View>
+          )}
+          initialNumToRender={10}
+          maxToRenderPerBatch={10}
+          windowSize={10}
+          removeClippedSubviews={true}
+          getItemLayout={(data, index) => ({
+            length: ITEM_HEIGHT,
+            offset: ITEM_HEIGHT * index,
+            index,
+          })}
+        />
+
+        <Pressable style={styles.closeButton} onPress={handleClose}>
+          <Text style={styles.closeButtonText}>Close</Text>
+        </Pressable>
+      </View>
+    </Modal>
   );
 }
 
 const styles = StyleSheet.create({
-  container: {},
-  modalOverlay: {
-    height: '100%',
-    width: '100%',
-    backgroundColor: 'rgba(0, 0, 0, 0.5)',
-  },
-  selectBox: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    gap: 10,
-    padding: 8,
-    borderWidth: 1,
-    borderColor: '#ccc',
-    borderRadius: 8,
-    backgroundColor: '#fff',
-  },
   icon: {
     width: 25,
     height: 25,
@@ -110,8 +100,8 @@ const styles = StyleSheet.create({
     fontWeight: '600',
   },
   modalContent: {
+    height: '100%',
     width: '100%',
-    maxHeight: '100%',
     backgroundColor: '#fff',
     padding: 16,
   },
@@ -124,7 +114,9 @@ const styles = StyleSheet.create({
     marginBottom: 16,
   },
   option: {
-    padding: 16,
+    height: ITEM_HEIGHT,
+    flexDirection: 'row',
+    alignItems: 'center',
     borderBottomWidth: 1,
     borderBottomColor: '#eee',
   },
@@ -137,10 +129,6 @@ const styles = StyleSheet.create({
   closeButtonText: {
     color: '#fff',
     textAlign: 'center',
-  },
-  column: {
-    display: 'flex',
-    flexDirection: 'column',
   },
   rowContainer: {
     width: 100,

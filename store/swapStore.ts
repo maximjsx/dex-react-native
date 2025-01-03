@@ -44,10 +44,8 @@ export const useTokenByType = (type: SwapType) =>
   useSwapStore((state) => (type === 'buy' ? state.buyToken : state.sellToken));
 export const useSellToken = () => useSwapStore((state) => state.sellToken);
 export const useBuyToken = () => useSwapStore((state) => state.buyToken);
-export const isTokenListOpen = (type: SwapType) =>
-  useSwapStore((state) =>
-    type === 'buy' ? state.isTokenListOpen.buy : state.isTokenListOpen.sell
-  );
+export const useTokenListOpen = () =>
+  useSwapStore((state) => state.isTokenListOpen);
 export const useSellAmount = () => useSwapStore((state) => state.sellAmount);
 
 // Actions

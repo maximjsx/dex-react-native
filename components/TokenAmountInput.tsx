@@ -7,24 +7,27 @@ type Props = {
 };
 
 export default function TokenAmountInput({ type }: Props) {
+  const isSellType = type === 'sell';
+
   const setSellAmount = useSetSellAmount();
   const sellAmount = useSellAmount();
 
   const handleInputChange = (input: string) => {
-    if (type === 'buy') return;
-    // Allow only numbers
-    const sanitizedInput = input.replace(/[^0-9]/g, '');
-    setSellAmount(sanitizedInput);
+    if (isSellType) {
+      // Allow only numbers
+      const sanitizedInput = input.replace(/[^0-9]/g, '');
+      setSellAmount(sanitizedInput);
+    }
   };
 
   return (
     <TextInput
-      value={sellAmount}
       style={styles.input}
       keyboardType='numeric'
-      editable={type === 'sell'}
+      editable={isSellType}
       onChangeText={handleInputChange}
-      placeholder={type === 'sell' ? 'Enter amount' : ''}
+      value={isSellType ? sellAmount : ''}
+      placeholder={isSellType ? 'Enter amount' : ''}
     />
   );
 }

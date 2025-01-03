@@ -6,7 +6,7 @@
       "address": "0x2791Bca1f2de4661ED88A30C99A7a9449Aa84174",
       "decimals": 6,
       "chainId": 137,
-      "logoURI": "https://cryptologos.cc/logos/usd-coin-usdc-logo.png"
+      "logoURI": "https://polygonscan.com/token/images/usdc_32.png"
     },
     {
       "name": "Wrapped MATIC",
@@ -14,7 +14,7 @@
       "address": "0x7ceB23fD6bC0adD59E62ac25578270cFf1b9f619",
       "decimals": 18,
       "chainId": 137,
-      "logoURI": "https://cryptologos.cc/logos/ethereum-eth-logo.png"
+      "logoURI": "https://polygonscan.com/token/images/wmatic_32.png"
     }
   ],
   "tokens": [
@@ -24,7 +24,7 @@
       "address": "0x7ceB23fD6bC0adD59E62ac25578270cFf1b9f619",
       "decimals": 18,
       "chainId": 137,
-      "logoURI": "https://cryptologos.cc/logos/ethereum-eth-logo.png"
+      "logoURI": "https://polygonscan.com/token/images/weth_32.png"
     },
     {
       "name": "Tether USD",
@@ -32,7 +32,7 @@
       "address": "0x3813e82e6f7098b9583FC0F33a962D02018B6803",
       "decimals": 6,
       "chainId": 137,
-      "logoURI": "https://cryptologos.cc/logos/tether-usdt-logo.png"
+      "logoURI": "https://polygonscan.com/token/images/tether_32.png"
     },
     {
       "name": "BNB",
@@ -40,7 +40,7 @@
       "address": "0x3BA4c387f786bFEE076A58914F5Bd38d668B42c3",
       "decimals": 18,
       "chainId": 137,
-      "logoURI": "https://cryptologos.cc/logos/bnb-bnb-logo.png"
+      "logoURI": "https://polygonscan.com/token/images/bnb_28_2.png"
     },
     {
       "name": "Wrapped SOL (Wormhole)",
@@ -48,7 +48,7 @@
       "address": "0x7dE9f0d5C1A1F7aE1d6e3E1E3E1E3E1E3E1E3E1E",
       "decimals": 9,
       "chainId": 137,
-      "logoURI": "https://cryptologos.cc/logos/solana-sol-logo.png"
+      "logoURI": "https://polygonscan.com/token/images/solanasol_32.png"
     },
     {
       "name": "USD Coin",
@@ -56,7 +56,7 @@
       "address": "0x2791Bca1f2de4661ED88A30C99A7a9449Aa84174",
       "decimals": 6,
       "chainId": 137,
-      "logoURI": "https://cryptologos.cc/logos/usd-coin-usdc-logo.png"
+      "logoURI": "https://polygonscan.com/token/images/usdc_32.png"
     },
     {
       "name": "USD Coin (PoS)",
@@ -64,7 +64,7 @@
       "address": "0x2791Bca1f2de4661ED88A30C99A7a9449Aa84174",
       "decimals": 6,
       "chainId": 137,
-      "logoURI": "https://cryptologos.cc/logos/usd-coin-usdc-logo.png"
+      "logoURI": "https://polygonscan.com/token/images/usdc_32.png"
     },
     {
       "name": "Binance USD",
@@ -72,7 +72,7 @@
       "address": "0xdab529f40e671a1d4bf91361c21bf9f0c9712ab7",
       "decimals": 18,
       "chainId": 137,
-      "logoURI": "https://cryptologos.cc/logos/binance-usd-busd-logo.png"
+      "logoURI": "https://polygonscan.com/token/images/busd_32.png"
     },
     {
       "name": "Avalanche Token",
@@ -80,7 +80,7 @@
       "address": "0x2b2C81e08f1Af8835a78Bb2A90AE924ACE0eA4bE",
       "decimals": 18,
       "chainId": 137,
-      "logoURI": "https://cryptologos.cc/logos/avalanche-avax-logo.png"
+      "logoURI": "https://polygonscan.com/token/images/avax_32.png"
     },
     {
       "name": "ChainLink Token",
@@ -88,7 +88,7 @@
       "address": "0x53e0bca35ec356bd5dddfebbd1fc0fd03fabad39",
       "decimals": 18,
       "chainId": 137,
-      "logoURI": "https://cryptologos.cc/logos/chainlink-link-logo.png"
+      "logoURI": "https://polygonscan.com/token/images/link_32.png"
     },
     {
       "name": "SHIBA INU (PoS)",
@@ -96,7 +96,7 @@
       "address": "0x6f8A06447ff6fcf75d803135a7de15ce88c1d4ec",
       "decimals": 18,
       "chainId": 137,
-      "logoURI": "https://cryptologos.cc/logos/shiba-inu-shib-logo.png"
+      "logoURI": "https://polygonscan.com/token/images/shib_32.png"
     },
     {
       "name": "Wrapped BTC",
@@ -104,7 +104,7 @@
       "address": "0x1bfd67037b42cf73acf2047067bd4f2c47d9bfd6",
       "decimals": 8,
       "chainId": 137,
-      "logoURI": "https://cryptologos.cc/logos/wrapped-bitcoin-wbtc-logo.png"
+      "logoURI": "https://polygonscan.com/token/images/wbtc_32.png"
     },
     {
       "name": "Uniswap (PoS)",
@@ -112,7 +112,7 @@
       "address": "0xb33eaad8d922b1083446dc23f610c2567fb5180f",
       "decimals": 18,
       "chainId": 137,
-      "logoURI": "https://cryptologos.cc/logos/uniswap-uni-logo.png"
+      "logoURI": "https://polygonscan.com/token/images/uni_32.png"
     },
     {
       "name": "Bitfinex LEO Token",
@@ -120,7 +120,7 @@
       "address": "0x9a0aba393aac4dfbff4333b06c407458002c6183",
       "decimals": 18,
       "chainId": 137,
-      "logoURI": "https://cryptologos.cc/logos/leo-token-leo-logo.png"
+      "logoURI": "https://polygonscan.com/token/images/leo_32.png"
     },
     {
       "name": "Aave (PoS)",
@@ -128,7 +128,7 @@
       "address": "0xd6df932a45c0f255f85145f286ea0b292b21c90b",
       "decimals": 18,
       "chainId": 137,
-      "logoURI": "https://cryptologos.cc/logos/aave-aave-logo.png"
+      "logoURI": "https://polygonscan.com/token/images/aave_32.png"
     },
     {
       "name": "Cronos Coin",
@@ -136,7 +136,7 @@
       "address": "0xada0a1202462085999652dc5310a7a9e2bf3ed42",
       "decimals": 8,
       "chainId": 137,
-      "logoURI": "https://cryptologos.cc/logos/crypto-com-coin-cro-logo.png"
+      "logoURI": "https://polygonscan.com/token/images/cro_32.png"
     },
     {
       "name": "Render Token",
@@ -144,7 +144,7 @@
       "address": "0x61299774020da444af134c82fa83e3810b309991",
       "decimals": 18,
       "chainId": 137,
-      "logoURI": "https://cryptologos.cc/logos/render-token-rndr-logo.png"
+      "logoURI": "https://polygonscan.com/token/images/rndr_32.png"
     },
     {
       "name": "Fetch",
@@ -152,7 +152,7 @@
       "address": "0x1d4c1c0b04c3c1e3ae707eb0e7c1743cc17e0d48",
       "decimals": 18,
       "chainId": 137,
-      "logoURI": "https://cryptologos.cc/logos/fetch-ai-fet-logo.png"
+      "logoURI": "https://polygonscan.com/token/images/fet_32.png"
     },
     {
       "name": "Decentraland",
@@ -160,7 +160,7 @@
       "address": "0xa3fa99a148fa48d14ed51d610c367c61876997f1",
       "decimals": 18,
       "chainId": 137,
-      "logoURI": "https://cryptologos.cc/logos/decentraland-mana-logo.png"
+      "logoURI": "https://polygonscan.com/token/images/mana_32.png"
     },
     {
       "name": "SushiSwap (PoS)",
@@ -168,7 +168,7 @@
       "address": "0x0b3f868e0be5597d5db7feb59e1cadbb0fdda50a",
       "decimals": 18,
       "chainId": 137,
-      "logoURI": "https://cryptologos.cc/logos/sushiswap-sushi-logo.png"
+      "logoURI": "https://polygonscan.com/token/images/sushi_32.png"
     },
     {
       "name": "QuickSwap",
@@ -176,7 +176,7 @@
       "address": "0x831753dd7087cac61ab5644b308642cc1c33dc13",
       "decimals": 18,
       "chainId": 137,
-      "logoURI": "https://cryptologos.cc/logos/quickswap-quick-logo.png"
+      "logoURI": "https://polygonscan.com/token/images/quick_32.png"
     },
     {
       "name": "Polygon",
@@ -184,7 +184,7 @@
       "address": "0x0000000000000000000000000000000000001010",
       "decimals": 18,
       "chainId": 137,
-      "logoURI": "https://cryptologos.cc/logos/polygon-matic-logo.png"
+      "logoURI": "https://polygonscan.com/token/images/matic_32.png"
     },
     {
       "name": "Dai Stablecoin",
@@ -192,7 +192,7 @@
       "address": "0x8f3cf7ad23cd3cadbd9735aff958023239c6a063",
       "decimals": 18,
       "chainId": 137,
-      "logoURI": "https://cryptologos.cc/logos/multi-collateral-dai-dai-logo.png"
+      "logoURI": "https://polygonscan.com/token/images/dai_32.png"
     },
     {
       "name": "Balancer",
@@ -200,7 +200,7 @@
       "address": "0x9a71012b13ca4d3d0cdc72a177df3ef03b0e76a3",
       "decimals": 18,
       "chainId": 137,
-      "logoURI": "https://cryptologos.cc/logos/balancer-bal-logo.png"
+      "logoURI": "https://polygonscan.com/token/images/bal_32.png"
     },
     {
       "name": "Curve DAO Token",
@@ -208,7 +208,7 @@
       "address": "0x172370d5cd63279efa6d502dab29171933a610af",
       "decimals": 18,
       "chainId": 137,
-      "logoURI": "https://cryptologos.cc/logos/curve-dao-token-crv-logo.png"
+      "logoURI": "https://polygonscan.com/token/images/crv_32.png"
     },
     {
       "name": "Graph Token",
@@ -216,7 +216,7 @@
       "address": "0x5fe2b58c013d7601147dcdcd64c9e7a75e3d1f6a",
       "decimals": 18,
       "chainId": 137,
-      "logoURI": "https://cryptologos.cc/logos/the-graph-grt-logo.png"
+      "logoURI": "https://polygonscan.com/token/images/grt_32.png"
     },
     {
       "name": "Axie Infinity Shard",
@@ -224,7 +224,7 @@
       "address": "0x9123e84a3fba14d30a54ab44d3aa509dd9d53f24",
       "decimals": 18,
       "chainId": 137,
-      "logoURI": "https://cryptologos.cc/logos/axie-infinity-axs-logo.png"
+      "logoURI": "https://polygonscan.com/token/images/axs_32.png"
     },
     {
       "name": "Synthetix Network Token",
@@ -232,7 +232,7 @@
       "address": "0x50b728d8d964fd00c2d0aad81718b71311fef68a",
       "decimals": 18,
       "chainId": 137,
-      "logoURI": "https://cryptologos.cc/logos/synthetix-network-token-snx-logo.png"
+      "logoURI": "https://polygonscan.com/token/images/snx_32.png"
     },
     {
       "name": "RenBTC",
@@ -240,7 +240,7 @@
       "address": "0xdbf31df14b66535af65aac99c32e9ea844e14501",
       "decimals": 8,
       "chainId": 137,
-      "logoURI": "https://cryptologos.cc/logos/renbtc-renbtc-logo.png"
+      "logoURI": "https://polygonscan.com/token/images/renbtc_32.png"
     },
     {
       "name": "Compound",
@@ -248,7 +248,7 @@
       "address": "0xada0a1202462085999652dc5310a7a9e2bf3ed42",
       "decimals": 18,
       "chainId": 137,
-      "logoURI": "https://cryptologos.cc/logos/compound-comp-logo.png"
+      "logoURI": "https://polygonscan.com/token/images/comp_32.png"
     },
     {
       "name": "Orchid",
@@ -256,7 +256,7 @@
       "address": "0xDA5B056Cfb861282B4b59d29c9B395bcC238D29B",
       "decimals": 18,
       "chainId": 137,
-      "logoURI": "https://cryptologos.cc/logos/orchid-oxt-logo.png"
+      "logoURI": "https://polygonscan.com/token/images/oxt_32.png"
     },
     {
       "name": "Ocean Protocol",
@@ -264,7 +264,7 @@
       "address": "0xdCe07662CA8EbC241316a15B611c89711414Dd1a",
       "decimals": 18,
       "chainId": 137,
-      "logoURI": "https://cryptologos.cc/logos/ocean-protocol-ocean-logo.png"
+      "logoURI": "https://polygonscan.com/token/images/ocean_32.png"
     },
     {
       "name": "Celsius",
@@ -272,7 +272,7 @@
       "address": "0xd85d1e945766fea5eda9103f918bd915fbca63e6",
       "decimals": 4,
       "chainId": 137,
-      "logoURI": "https://cryptologos.cc/logos/celsius-cel-logo.png"
+      "logoURI": "https://polygonscan.com/token/images/cel_32.png"
     },
     {
       "name": "Enjin Coin",
@@ -280,7 +280,7 @@
       "address": "0x7eC26842F195aCeCa5e4F0B5D8cA51bFe40e98EC",
       "decimals": 18,
       "chainId": 137,
-      "logoURI": "https://cryptologos.cc/logos/enjin-coin-enj-logo.png"
+      "logoURI": "https://polygonscan.com/token/images/enj_32.png"
     },
     {
       "name": "Golem",
@@ -288,7 +288,7 @@
       "address": "0x9B3e94610E2Dda6D1bDceB4A2cD8BB0B84812BFd",
       "decimals": 18,
       "chainId": 137,
-      "logoURI": "https://cryptologos.cc/logos/golem-glm-logo.png"
+      "logoURI": "https://polygonscan.com/token/images/glm_32.png"
     },
     {
       "name": "Ampleforth",
@@ -296,7 +296,7 @@
       "address": "0xd46Ba6D942050d489dC72E98b6E31eD29Db9d30D",
       "decimals": 9,
       "chainId": 137,
-      "logoURI": "https://cryptologos.cc/logos/ampleforth-ampl-logo.png"
+      "logoURI": "https://polygonscan.com/token/images/ampl_32.png"
     }
   ]
 }

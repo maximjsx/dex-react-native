@@ -18,13 +18,15 @@ export default function TokenSelect({ type }: Props) {
 
   return (
     <Pressable style={styles.container} onPress={hanldePress}>
-      <Image
-        style={styles.icon}
-        resizeMode='contain'
-        source={{
-          uri: token?.logoURI,
-        }}
-      />
+      {token?.logoURI ? (
+        <Image
+          style={styles.icon}
+          resizeMode='contain'
+          source={{
+            uri: token?.logoURI,
+          }}
+        />
+      ) : null}
       <ThemedText style={styles.symbol}>{token?.symbol}</ThemedText>
       <Ionicons name='chevron-down' size={20} color='grey' />
     </Pressable>

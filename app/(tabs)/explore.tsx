@@ -1,18 +1,22 @@
 import TokenBox from '@/components/TokenBox';
-import useInitSwap from '@/hooks/useInitSwap';
 import { StyleSheet, View } from 'react-native';
 import SwapButton from '@/components/SwapButton';
+import useInitTokens from '@/hooks/useInitTokens';
+import useGetSwapPrice from '@/hooks/useGetSwapPrice';
+import TokenListModal from '@/components/TokenListModal';
 
 export default function SwapScreen() {
-  const initSwap = useInitSwap();
+  const initTokens = useInitTokens();
+  useGetSwapPrice();
 
-  if (!initSwap.tokensList) return null;
+  if (!initTokens.tokensList) return null;
 
   return (
     <View style={styles.container}>
-      <TokenBox type='sell' data={initSwap.tokensList} />
+      <TokenBox type='sell' data={initTokens.tokensList} />
       <SwapButton />
-      <TokenBox type='buy' data={initSwap.tokensList} />
+      <TokenBox type='buy' data={initTokens.tokensList} />
+      <TokenListModal data={initTokens.tokensList} />
     </View>
   );
 }
