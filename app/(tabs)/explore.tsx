@@ -5,12 +5,16 @@ import useGetSwapPrice from '@/hooks/useGetSwapPrice';
 import { StyleSheet, Text, View } from 'react-native';
 import TokenListModal from '@/components/TokenListModal';
 import SwapButton from '@/components/SwapButton';
+// import useGetTokens from '@/hooks/useGetTokens';
 
 export default function SwapScreen() {
   const initTokens = useInitTokens();
   const price = useGetSwapPrice();
+  // const tokens = useGetTokens();
 
   if (!initTokens.tokensList) return null;
+
+  // console.log('LIQUIDITY_AVAILABLE:', price.data?.liquidityAvailable);
 
   return (
     <View style={styles.container}>
@@ -33,13 +37,10 @@ export default function SwapScreen() {
             ? price.data.issues.allowance.actual
             : ''}
         </Text>
-        <Text>
-          Sell token balance: {price.data?.issues?.balance?.token || '0'}
-        </Text>
       </View>
 
       <SwapButton />
-      <TokenListModal data={initTokens.tokensList} />
+      <TokenListModal data={initTokens.tokensList.list} />
     </View>
   );
 }

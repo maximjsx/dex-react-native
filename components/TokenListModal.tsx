@@ -14,10 +14,10 @@ import {
 } from '@/store/swapStore';
 import { useState } from 'react';
 import TokenSearch from './TokenSearch';
-import { Token, TokensList } from '@/types/tokenTypes';
+import { Token, TokenObject } from '@/types/tokenTypes';
 
 type Props = {
-  data: TokensList;
+  data: TokenObject[];
 };
 
 const ITEM_HEIGHT = 70;
@@ -31,11 +31,15 @@ export default function TokenListModal({ data }: Props) {
 
   const [searchQuery, setSearchQuery] = useState('');
 
+  const flattenedList: Token[] = data.flatMap((tokenObject) =>
+    Object.values(tokenObject)
+  );
+
   const filteredData = searchQuery
-    ? data.tokens.filter((item) =>
+    ? flattenedList.filter((item) =>
         item.symbol.toLowerCase().includes(searchQuery.toLowerCase())
       )
-    : data.tokens;
+    : flattenedList;
 
   const handleSelect = (item: Token) => {
     setTokenByType(type, item);
@@ -58,14 +62,14 @@ export default function TokenListModal({ data }: Props) {
 
         <FlatList
           data={filteredData}
-          keyExtractor={(item) => item.symbol}
+          keyExtractor={(item) => item.address}
           renderItem={({ item }) => (
             <Pressable style={styles.option} onPress={() => handleSelect(item)}>
               <View style={styles.rowContainer}>
                 <Image
                   style={styles.icon}
                   resizeMode='contain'
-                  source={{ uri: item.logoURI }}
+                  source={{ uri: item.logoURI || '' }}
                 />
                 <Text style={styles.symbol}>{item.symbol}</Text>
                 <Text style={styles.name}>{item.name}</Text>

@@ -16,7 +16,7 @@ interface SwapState {
 export const useSwapStore = create<SwapState>((set) => ({
   sellToken: null,
   buyToken: null,
-  sellAmount: '1',
+  sellAmount: '0.1',
   isTokenListOpen: { sell: false, buy: false },
   setTokenByType: (type, token) =>
     set((state) => ({

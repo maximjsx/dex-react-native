@@ -1,19 +1,25 @@
-export interface TokensList {
-  defaultPair: Token[];
-  tokens: Token[];
-}
-
-export interface TokenVersion {
-  major: number;
-  minor: number;
-  patch: number;
-}
-
-export interface Token {
+export type Token = {
   address: string;
   chainId: number;
-  name: string;
-  symbol: string;
   decimals: number;
-  logoURI: string;
+  eip2612: boolean;
+  isFoT: boolean;
+  logoURI: string | null;
+  name: string;
+  providers: string[];
+  symbol: string;
+  tags: string[];
+};
+
+export type TokenObject = {
+  [address: string]: Token;
+};
+
+export interface Tokens {
+  defaultPair: TokenObject[];
+  list: TokenObject[];
+}
+
+export interface TokensList {
+  list: TokenObject[];
 }

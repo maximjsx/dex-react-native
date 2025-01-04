@@ -14,7 +14,11 @@ export default function TokenBox({ type, price }: Props) {
   return (
     <View style={styles.container}>
       <TokenSelect type={type} />
-      <TokenAmountInput type={type} buyAmount={price.data?.buyAmount} />
+      <TokenAmountInput
+        type={type}
+        isLoading={price.isLoading}
+        buyAmount={price.data?.buyAmount}
+      />
     </View>
   );
 }

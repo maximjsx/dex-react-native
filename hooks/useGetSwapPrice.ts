@@ -1,7 +1,8 @@
 import { useAccount } from 'wagmi';
-import { getSwapPrice } from '@/apis/swap';
 import { useQuery } from '@tanstack/react-query';
 import { useBuyToken, useSellToken, useSellAmount } from '@/store/swapStore';
+import { formatToBaseUnits } from '@/utils/priceUtils';
+import { getSwapPrice } from '@/apis/swapApis';
 
 export default function useGetSwapPrice() {
   const account = useAccount();
@@ -13,7 +14,10 @@ export default function useGetSwapPrice() {
     chainId: account.chainId as number,
     buyToken: buyToken?.address as string,
     sellToken: sellToken?.address as string,
-    sellAmount: sellAmmount,
+    sellAmount: formatToBaseUnits(
+      sellAmmount,
+      sellToken?.decimals || 0
+    ).toString(),
   };
 
   return useQuery({

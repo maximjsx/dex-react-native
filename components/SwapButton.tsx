@@ -11,7 +11,7 @@ export default function SwapButton() {
 const styles = StyleSheet.create({
   button: {
     padding: 12,
-    backgroundColor: '#007BFF',
+    backgroundColor: '#000',
     borderRadius: 8,
   },
   text: {

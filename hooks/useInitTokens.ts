@@ -1,8 +1,8 @@
 import { useAccount } from 'wagmi';
 import { useEffect, useMemo } from 'react';
 import { useSetDefaultTokens } from '@/store/swapStore';
-import polygonTokenListData from '../data/polygonTokensListData.json';
-import ethereumTokenListData from '../data/ethereumTokensListData.json';
+import ethTokensData from '../data/ethTokensData.json';
+import polTokensData from '../data/polTokensData.json';
 
 export default function useInitTokens() {
   const account = useAccount();
@@ -10,16 +10,19 @@ export default function useInitTokens() {
 
   const tokensList = useMemo(() => {
     if (account.chainId === 1) {
-      return ethereumTokenListData;
+      return ethTokensData;
     }
     if (account.chainId === 137) {
-      return polygonTokenListData;
+      return polTokensData;
     }
   }, [account.chainId]);
 
   useEffect(() => {
     if (tokensList) {
-      setDefaultTokens(tokensList.defaultPair);
+      const flattenedTokens = tokensList.defaultPair.flatMap((tokenObject) =>
+        Object.values(tokenObject)
+      );
+      setDefaultTokens(flattenedTokens);
     }
   }, [tokensList]);
 
