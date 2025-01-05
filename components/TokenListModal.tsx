@@ -45,11 +45,12 @@ export default function TokenListModal() {
   const handleSelect = (item: Token) => {
     setTokenByType(type, item);
     openTokenList(type, false);
+    setSearchQuery('');
   };
 
   const handleClose = () => {
-    setSearchQuery('');
     openTokenList(type, false);
+    setSearchQuery('');
   };
 
   return (

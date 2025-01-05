@@ -1,6 +1,6 @@
 import { useAccount } from 'wagmi';
 import SwapButton from './SwapButton';
-import { useTokenByType } from '@/store/swapStore';
+import { useSellAmount, useTokenByType } from '@/store/swapStore';
 
 type Props = {
   allowance: string | undefined;
@@ -8,14 +8,16 @@ type Props = {
 
 export default function SwapButtonWrapper({ allowance }: Props) {
   const sellToken = useTokenByType('sell');
+  const sellAmount = useSellAmount();
   const account = useAccount();
 
-  if (sellToken?.address && account.address) {
+  if (sellToken && account.address) {
     return (
       <SwapButton
         allowance={allowance}
-        sellTokenAddress={sellToken.address}
         walletAddress={account.address}
+        sellAmount={sellAmount}
+        sellToken={sellToken}
       />
     );
   }

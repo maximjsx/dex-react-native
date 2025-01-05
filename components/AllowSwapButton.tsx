@@ -3,6 +3,7 @@ import { Address } from '@/types/swapTypes';
 import { Pressable, StyleSheet, Text } from 'react-native';
 import { useWriteContract, useSimulateContract } from 'wagmi';
 import { MAX_ALLOWANCE, SWAP_PROXY_ADDRESS } from '@/constants';
+import { Token } from '@/types/tokenTypes';
 
 // `SWAP_PROXY_ADDRESS` contract acts like a proxy between sell token contract and erc20 contract.
 
@@ -11,26 +12,13 @@ import { MAX_ALLOWANCE, SWAP_PROXY_ADDRESS } from '@/constants';
 // 3. Verify the Allowance: Ensure the returned allowance is greater than or equal to the amount you intend to swap.
 
 type Props = {
-  sellTokenAddress: string;
-  walletAddress: Address;
+  sellToken: Token;
 };
 
-export default function AllowSwapButton({
-  sellTokenAddress,
-  walletAddress,
-}: Props) {
-  // Read from erc20, does spender `SWAP_PROXY_ADDRESS` have allowance?
-  // Retunrns `0n` if no allowance
-  // const readContractResult = useReadContract({
-  //   abi: erc20Abi,
-  //   address: sellTokenAddress as Address,
-  //   functionName: 'allowance',
-  //   args: [walletAddress, SWAP_PROXY_ADDRESS],
-  // });
-
+export default function AllowSwapButton({ sellToken }: Props) {
   const simulateContractResult = useSimulateContract({
     abi: erc20Abi,
-    address: sellTokenAddress as Address,
+    address: sellToken.address as Address,
     functionName: 'approve',
     args: [SWAP_PROXY_ADDRESS, MAX_ALLOWANCE],
   });
@@ -45,7 +33,7 @@ export default function AllowSwapButton({
 
   return (
     <Pressable style={styles.button} onPress={handleAllowSwap}>
-      <Text style={styles.text}>Allow swap</Text>
+      <Text style={styles.text}>Allow {sellToken.symbol} for swap</Text>
     </Pressable>
   );
 }
@@ -57,7 +45,7 @@ const styles = StyleSheet.create({
     borderRadius: 8,
   },
   text: {
-    fontSize: 16,
+    fontSize: 14,
     color: '#fff',
     textAlign: 'center',
   },
