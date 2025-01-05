@@ -14,15 +14,14 @@ import {
 } from '@/store/swapStore';
 import { useState } from 'react';
 import TokenSearch from './TokenSearch';
-import { Token, TokenObject } from '@/types/tokenTypes';
-
-type Props = {
-  data: TokenObject[];
-};
+import { Token } from '@/types/tokenTypes';
+import useInitTokens from '@/hooks/useInitTokens';
 
 const ITEM_HEIGHT = 70;
 
-export default function TokenListModal({ data }: Props) {
+export default function TokenListModal() {
+  const { tokensList } = useInitTokens();
+
   const tokenListOpen = useTokenListOpen();
   const type = tokenListOpen.buy ? 'buy' : 'sell';
 
@@ -31,7 +30,9 @@ export default function TokenListModal({ data }: Props) {
 
   const [searchQuery, setSearchQuery] = useState('');
 
-  const flattenedList: Token[] = data.flatMap((tokenObject) =>
+  if (!tokensList) return null;
+
+  const flattenedList: Token[] = tokensList.list.flatMap((tokenObject) =>
     Object.values(tokenObject)
   );
 
