@@ -3,7 +3,6 @@ import TokenBox from './TokenBox';
 import RevertButton from './RevertButton';
 import { StyleSheet, Text, View } from 'react-native';
 import useGetSwapPrice from '@/hooks/useGetSwapPrice';
-import SwapButtonWrapper from './SwapButtonWrapper';
 
 export default function SwapInfo() {
   const price = useGetSwapPrice();
@@ -24,8 +23,6 @@ export default function SwapInfo() {
         </Text>
         <Text>Min buy amount: {price.data?.minBuyAmount || ''}</Text>
       </View>
-
-      <SwapButtonWrapper allowance={price.data?.issues?.allowance?.actual} />
     </Fragment>
   );
 }

@@ -1,11 +1,13 @@
 import SwapInfo from '@/components/SwapInfo';
 import { StyleSheet, View } from 'react-native';
 import TokenListModal from '@/components/TokenListModal';
+import SwapButtonWrapper from '@/components/SwapButtonWrapper';
 
 export default function SwapScreen() {
   return (
     <View style={styles.container}>
       <SwapInfo />
+      <SwapButtonWrapper />
       <TokenListModal />
     </View>
   );

@@ -1,9 +1,9 @@
 import { erc20Abi } from 'viem';
+import { Token } from '@/types/tokenTypes';
 import { Address } from '@/types/swapTypes';
 import { Pressable, StyleSheet, Text } from 'react-native';
 import { useWriteContract, useSimulateContract } from 'wagmi';
 import { MAX_ALLOWANCE, SWAP_PROXY_ADDRESS } from '@/constants';
-import { Token } from '@/types/tokenTypes';
 
 // `SWAP_PROXY_ADDRESS` contract acts like a proxy between sell token contract and erc20 contract.
 
@@ -30,6 +30,8 @@ export default function AllowSwapButton({ sellToken }: Props) {
       writeContractResult.writeContract(simulateContractResult.data.request);
     }
   };
+
+  console.log('writeContractResult', writeContractResult.data);
 
   return (
     <Pressable style={styles.button} onPress={handleAllowSwap}>

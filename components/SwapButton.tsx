@@ -1,33 +1,32 @@
-import { useBalance } from 'wagmi';
-import { parseUnits } from 'viem';
 import { Token } from '@/types/tokenTypes';
 import { Address } from '@/types/swapTypes';
+import { erc20Abi, parseUnits } from 'viem';
 import AllowSwapButton from './AllowSwapButton';
-import { NATIVE_TOKEN_ADDRESS } from '@/constants';
+import { useBalance, useReadContract } from 'wagmi';
 import { Pressable, StyleSheet, Text, View } from 'react-native';
+import { NATIVE_TOKEN_ADDRESS, SWAP_PROXY_ADDRESS } from '@/constants';
 
 type Props = {
-  allowance: string | undefined;
   sellToken: Token;
   sellAmount: string;
   walletAddress: Address;
 };
 
 export default function SwapButton({
-  allowance,
   sellToken,
   sellAmount,
   walletAddress,
 }: Props) {
-  // Since the price API returns the allowance field, we don't need this hook, but a ready-to-use hook is included just in case.
   // Read from erc20, does spender `SWAP_PROXY_ADDRESS` have allowance?
   // Retunrns `0n` if no allowance
-  // const readContractResult = useReadContract({
-  //   abi: erc20Abi,
-  //   address: sellTokenAddress as Address,
-  //   functionName: 'allowance',
-  //   args: [walletAddress, SWAP_PROXY_ADDRESS],
-  // });
+  const readContractResult = useReadContract({
+    abi: erc20Abi,
+    address: sellToken.address as Address,
+    functionName: 'allowance',
+    args: [walletAddress, SWAP_PROXY_ADDRESS],
+  });
+
+  const sellTokenAllowance = readContractResult.data;
 
   const isNativeToken = sellToken.address === NATIVE_TOKEN_ADDRESS;
 
@@ -46,17 +45,15 @@ export default function SwapButton({
 
   const allowedToSwap = isNativeToken
     ? enoughWalletBalance
-    : Boolean(enoughWalletBalance && allowance && allowance !== '0');
+    : Boolean(
+        enoughWalletBalance && sellTokenAllowance && sellTokenAllowance !== 0n
+      );
 
   const needsApprove = Boolean(
-    !isNativeToken &&
-      walletBalanceValue &&
-      walletBalanceValue !== 0n &&
-      allowance &&
-      allowance === '0'
+    !isNativeToken && enoughWalletBalance && sellTokenAllowance === 0n
   );
 
-  if (walletBalanceValue === 0n) {
+  if (!enoughWalletBalance) {
     return (
       <View>
         <Pressable style={styles.button}>
