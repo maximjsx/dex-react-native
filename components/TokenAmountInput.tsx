@@ -1,13 +1,13 @@
 import {
   useSellAmount,
-  useSetSellAmount,
   useTokenByType,
+  useSetSellAmount,
 } from '@/store/swapStore';
 import React from 'react';
 import { SwapType } from '@/types/swapTypes';
+import { formatTokenValue } from '@/utils/swapUtils';
 import { TextInput, StyleSheet, View } from 'react-native';
 import ContentLoader, { Rect } from 'react-content-loader/native';
-import { formatTokenValue } from '@/utils/priceUtils';
 
 type Props = {
   type: SwapType;

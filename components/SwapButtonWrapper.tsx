@@ -1,6 +1,7 @@
 import { useAccount } from 'wagmi';
 import { Link } from 'expo-router';
 import SwapButton from './SwapButton';
+import { StyleSheet } from 'react-native';
 import { useSellAmount, useTokenByType } from '@/store/swapStore';
 
 export default function SwapButtonWrapper() {
@@ -17,8 +18,21 @@ export default function SwapButtonWrapper() {
       />
     );
   } else {
-    <Link href='/' />;
+    <Link style={styles.link} href='/'>
+      Connect wallet
+    </Link>;
   }
 
   return null;
 }
+
+const styles = StyleSheet.create({
+  link: {
+    padding: 12,
+    backgroundColor: '#000',
+    borderRadius: 8,
+    fontSize: 14,
+    color: '#fff',
+    textAlign: 'center',
+  },
+});

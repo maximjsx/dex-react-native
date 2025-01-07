@@ -7,7 +7,7 @@ import { SwapPriceApiResponse } from '@/types/priceTypes';
 
 type Props = {
   type: SwapType;
-  price: UseQueryResult<SwapPriceApiResponse, Error>;
+  price: UseQueryResult<SwapPriceApiResponse | undefined, Error>;
 };
 
 export default function TokenBox({ type, price }: Props) {

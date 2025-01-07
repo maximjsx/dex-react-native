@@ -3,11 +3,6 @@ import {
   DefaultTheme,
   ThemeProvider,
 } from '@react-navigation/native';
-import {
-  AppKit,
-  createAppKit,
-  defaultWagmiConfig,
-} from '@reown/appkit-wagmi-react-native';
 import 'react-native-reanimated';
 import { useEffect } from 'react';
 import { Stack } from 'expo-router';
@@ -15,9 +10,11 @@ import { useFonts } from 'expo-font';
 import { WagmiProvider } from 'wagmi';
 import '@walletconnect/react-native-compat';
 import { StatusBar } from 'expo-status-bar';
+import { mainnet } from '@wagmi/core/chains';
 import * as SplashScreen from 'expo-splash-screen';
 import { useColorScheme } from '@/hooks/useColorScheme';
-import { mainnet, polygon, arbitrum } from '@wagmi/core/chains';
+import { REOWN_PROJECT_ID, wagmiConfig } from '@/web3Config';
+import { AppKit, createAppKit } from '@reown/appkit-wagmi-react-native';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 
 // Prevent the splash screen from auto-hiding before asset loading is complete.
@@ -25,25 +22,8 @@ SplashScreen.preventAutoHideAsync();
 
 const queryClient = new QueryClient();
 
-const projectId = process.env.EXPO_PUBLIC_REOWN_PROJECT_ID || '';
-
-const metadata = {
-  name: 'Dex',
-  description: 'Dex swap React native MVP',
-  url: 'https://reown.com/appkit',
-  icons: ['https://avatars.githubusercontent.com/u/179229932'],
-  redirect: {
-    native: 'YOUR_APP_SCHEME://',
-    universal: 'YOUR_APP_UNIVERSAL_LINK.com',
-  },
-};
-
-const chains = [mainnet, polygon, arbitrum] as const;
-
-const wagmiConfig = defaultWagmiConfig({ chains, projectId, metadata });
-
 createAppKit({
-  projectId,
+  projectId: REOWN_PROJECT_ID,
   wagmiConfig,
   defaultChain: mainnet,
   enableAnalytics: true,
@@ -74,6 +54,7 @@ export default function RootLayout() {
         >
           <Stack>
             <Stack.Screen name='(tabs)' options={{ headerShown: false }} />
+            <Stack.Screen name='order' />
             <Stack.Screen name='+not-found' />
           </Stack>
           <StatusBar style='auto' />

@@ -5,6 +5,7 @@ import AllowSwapButton from './AllowSwapButton';
 import { useBalance, useReadContract } from 'wagmi';
 import { Pressable, StyleSheet, Text, View } from 'react-native';
 import { NATIVE_TOKEN_ADDRESS, SWAP_PROXY_ADDRESS } from '@/constants';
+import { Link } from 'expo-router';
 
 type Props = {
   sellToken: Token;
@@ -55,21 +56,17 @@ export default function SwapButton({
 
   if (!enoughWalletBalance) {
     return (
-      <View>
-        <Pressable style={styles.button}>
-          <Text style={styles.text}>
-            Insufficient {sellToken.symbol} balance
-          </Text>
-        </Pressable>
-      </View>
+      <Pressable style={styles.button}>
+        <Text style={styles.text}>Insufficient {sellToken.symbol} balance</Text>
+      </Pressable>
     );
   }
 
   if (allowedToSwap) {
     return (
-      <Pressable style={styles.button}>
+      <Link href='/order' style={styles.button}>
         <Text style={styles.text}>Swap</Text>
-      </Pressable>
+      </Link>
     );
   }
 

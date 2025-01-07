@@ -27,7 +27,7 @@ export default function TokenSelect({ type }: Props) {
           }}
         />
       ) : null}
-      <ThemedText style={styles.symbol}>{token?.symbol}</ThemedText>
+      <ThemedText style={styles.symbol}>{token?.symbol || ''}</ThemedText>
       <Ionicons name='chevron-down' size={20} color='grey' />
     </Pressable>
   );

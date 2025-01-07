@@ -1,10 +1,10 @@
 import { useAccount } from 'wagmi';
-import { getSwapPrice } from '@/apis/swapApis';
+import { getSwapQuote } from '@/apis/swapApis';
 import { useQuery } from '@tanstack/react-query';
 import { formatToBaseUnits } from '@/utils/swapUtils';
 import { useBuyToken, useSellToken, useSellAmount } from '@/store/swapStore';
 
-export default function useGetSwapPrice() {
+export default function useGetSwapQuote() {
   const account = useAccount();
   const buyToken = useBuyToken();
   const sellToken = useSellToken();
@@ -14,6 +14,7 @@ export default function useGetSwapPrice() {
   const buyTokenAddress = buyToken?.address;
   const sellTokenAddress = sellToken?.address;
   const sellTokenDecimals = sellToken?.decimals;
+  const takerAddress = account.address;
 
   const formattedSellAmount =
     sellAmount !== undefined && sellTokenDecimals !== undefined
@@ -24,21 +25,23 @@ export default function useGetSwapPrice() {
     chainId !== undefined &&
     buyTokenAddress !== undefined &&
     sellTokenAddress !== undefined &&
-    formattedSellAmount !== undefined;
+    formattedSellAmount !== undefined &&
+    takerAddress !== undefined;
 
-  const priceQueryParams = isEnabled
+  const quoteQueryParams = isEnabled
     ? {
         chainId,
         buyToken: buyTokenAddress,
         sellToken: sellTokenAddress,
         sellAmount: formattedSellAmount,
+        taker: takerAddress,
       }
     : undefined;
 
   return useQuery({
-    queryKey: ['swapPrice', priceQueryParams],
+    queryKey: ['swapQuote', quoteQueryParams],
     queryFn: () =>
-      priceQueryParams ? getSwapPrice(priceQueryParams) : undefined,
+      quoteQueryParams ? getSwapQuote(quoteQueryParams) : undefined,
     enabled: isEnabled,
   });
 }
