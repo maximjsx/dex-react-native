@@ -1,50 +1,21 @@
-# Welcome to your Expo app 👋
+# DEX APP (React Native)
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+This is a fully functional Web3 exchanger, but I haven't had time yet to fully polish the UI and improve the UX. The code was written quickly and doesn’t follow best practices yet, but you can already see my skills, the logic behind it, and how it effectively gets the job done. It’s already working very fast and is quite optimized.
 
-## Get started
+Swap View – You can select a token and check swap details.
+![Alt Text](assets/images/01.png)
 
-1. Install dependencies
+Connect Wallet View – This screen shows that the MetaMask wallet is connected.
+![Alt Text](assets/images/02.png)
 
-   ```bash
-   npm install
-   ```
+Token Selection – You can search or scroll through many tokens available on the network.
+![Alt Text](assets/images/03.png)
 
-2. Start the app
+Swap Confirmation – When you press Swap, the MetaMask wallet will open, prompting you to sign and confirm the swap. Additional swap details will also be displayed.
+![Alt Text](assets/images/04.png)
 
-   ```bash
-    npx expo start
-   ```
+Transaction Processing – After successfully signing and sending the transaction to the blockchain, a Check transaction button appears. This redirects to Polygonscan, where you can view the transaction status. (In a future update, all statuses will be shown in-app, with push notifications, sound, and vibration.)
+![Alt Text](assets/images/05.png)
 
-In the output, you'll find options to open the app in a
-
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
-
-You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
-
-## Get a fresh project
-
-When you're ready, run:
-
-```bash
-npm run reset-project
-```
-
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
-
-## Learn more
-
-To learn more about developing your project with Expo, look at the following resources:
-
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
-
-## Join the community
-
-Join our community of developers creating universal apps.
-
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
+Transaction Details – This is the real transaction information displayed after pressing the Check transaction button.
+![Alt Text](assets/images/06.png)

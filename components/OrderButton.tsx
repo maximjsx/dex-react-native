@@ -14,6 +14,8 @@ export default function OrderButton({ transaction }: Props) {
 
   console.log('TX', data);
 
+  // https://wagmi.sh/core/api/actions/sendTransaction#sendtransaction
+  // pass more params like wallet address, chainId etc - to make TX more robust!
   const handleSendTransaction = () => {
     sendTransaction({
       to: transaction.to as Address,
@@ -29,7 +31,7 @@ export default function OrderButton({ transaction }: Props) {
           style={styles.button}
           href={`https://polygonscan.com/tx/${data}`} // Pass scan dynamicly based on network
         >
-          Check transaction
+          <Text style={styles.text}>Check transaction</Text>
         </Link>
       ) : (
         <Pressable onPress={handleSendTransaction} style={styles.button}>
