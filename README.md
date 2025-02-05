@@ -12,7 +12,7 @@ You can select a network from the list. For this demo, I chose Polygon because i
 
 <img src="assets/images/02.jpg" width="300">
 
-Swap View – You can select a token and check swap details. The inputs are sanitized, and the token value is converted from BigInt to a human-readable floating-point number.
+Swap View – You can select a token and check the swap details. The inputs are sanitized, and the token value is converted from BigInt to a human-readable floating-point number. We can proceed with the swap because I’ve already approved the token to keep the demo short and to the point. However, the app performs the full flow of checking the wallet balance, allowance, and if everything is in order, the swap can be completed.
 
 <img src="assets/images/03.jpg" width="300">
 
