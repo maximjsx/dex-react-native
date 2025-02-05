@@ -12,15 +12,15 @@ You can select a network from the list. For this demo, I chose Polygon because i
 
 <img src="assets/images/02.jpg" width="300">
 
-Swap View – You can select a token and check swap details.
+Swap View – You can select a token and check swap details. The inputs are sanitized, and the token value is converted from BigInt to a human-readable floating-point number.
 
 <img src="assets/images/03.jpg" width="300">
 
-Token Selection – You can search or scroll through many tokens available on the network.
+Token Selection – You can search or scroll through many tokens available on the network. This is a virtualized list, so it can handle dozens of tokens without sacrificing performance.
 
 <img src="assets/images/04.jpg" width="300">
 
-Swap Confirmation – When you press Swap, the MetaMask wallet will open, prompting you to sign and confirm the swap. Additional swap details will also be displayed.
+Swap Confirmation – Here, you can review the final prices and details before confirming the transaction. When you press Swap, the MetaMask wallet will open, prompting you to sign and confirm the swap. Additional swap details will also be displayed.
 
 <img src="assets/images/05.jpg" width="300">
 
