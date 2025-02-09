@@ -1,11 +1,14 @@
-import { useAccount } from 'wagmi';
+import { Config, UseAccountReturnType } from 'wagmi';
 import { getSwapPrice } from '@/apis/swapApis';
 import { useQuery } from '@tanstack/react-query';
 import { formatToBaseUnits } from '@/utils/swapUtils';
 import { useBuyToken, useSellToken, useSellAmount } from '@/store/swapStore';
 
-export default function useGetSwapPrice() {
-  const account = useAccount();
+type Args = {
+  account: UseAccountReturnType<Config>;
+};
+
+export default function useGetSwapPrice({ account }: Args) {
   const buyToken = useBuyToken();
   const sellToken = useSellToken();
   const sellAmount = useSellAmount();

@@ -1,13 +1,4 @@
 import {
-  Text,
-  View,
-  Modal,
-  Image,
-  FlatList,
-  Pressable,
-  StyleSheet,
-} from 'react-native';
-import {
   useTokenListOpen,
   useSetTokenByType,
   useOpenTokenListByType,
@@ -15,12 +6,15 @@ import {
 import { useState } from 'react';
 import TokenSearch from './TokenSearch';
 import { Token } from '@/types/tokenTypes';
-import useInitTokens from '@/hooks/useInitTokens';
+import { ThemedText } from '../theme/ThemedText';
+import { ThemedView } from '../theme/ThemedView';
+import useInitTokenList from '@/hooks/useInitTokenList';
+import { Modal, Image, FlatList, Pressable, StyleSheet } from 'react-native';
 
 const ITEM_HEIGHT = 70;
 
 export default function TokenListModal() {
-  const { tokensList } = useInitTokens();
+  const { tokenList } = useInitTokenList();
 
   const tokenListOpen = useTokenListOpen();
   const type = tokenListOpen.buy ? 'buy' : 'sell';
@@ -30,17 +24,13 @@ export default function TokenListModal() {
 
   const [searchQuery, setSearchQuery] = useState('');
 
-  if (!tokensList) return null;
-
-  const flattenedList: Token[] = tokensList.list.flatMap((tokenObject) =>
-    Object.values(tokenObject)
-  );
+  if (!tokenList) return null;
 
   const filteredData = searchQuery
-    ? flattenedList.filter((item) =>
+    ? tokenList.filter((item) =>
         item.symbol.toLowerCase().includes(searchQuery.toLowerCase())
       )
-    : flattenedList;
+    : tokenList;
 
   const handleSelect = (item: Token) => {
     setTokenByType(type, item);
@@ -59,7 +49,7 @@ export default function TokenListModal() {
       animationType='fade'
       visible={tokenListOpen.buy || tokenListOpen.sell}
     >
-      <View style={styles.modalContent}>
+      <ThemedView style={styles.modalContent}>
         <TokenSearch query={searchQuery} onChange={setSearchQuery} />
 
         <FlatList
@@ -67,15 +57,15 @@ export default function TokenListModal() {
           keyExtractor={(item) => item.address}
           renderItem={({ item }) => (
             <Pressable style={styles.option} onPress={() => handleSelect(item)}>
-              <View style={styles.rowContainer}>
+              <ThemedView style={styles.rowContainer}>
                 <Image
                   style={styles.icon}
                   resizeMode='contain'
                   source={{ uri: item.logoURI || '' }}
                 />
-                <Text style={styles.symbol}>{item.symbol}</Text>
-                <Text style={styles.name}>{item.name}</Text>
-              </View>
+                <ThemedText style={styles.symbol}>{item.symbol}</ThemedText>
+                <ThemedText style={styles.name}>{item.name}</ThemedText>
+              </ThemedView>
             </Pressable>
           )}
           initialNumToRender={10}
@@ -89,10 +79,10 @@ export default function TokenListModal() {
           })}
         />
 
-        <Pressable style={styles.closeButton} onPress={handleClose}>
-          <Text style={styles.closeButtonText}>Close</Text>
+        <Pressable style={styles.closePressable} onPress={handleClose}>
+          <ThemedText style={styles.closePressableText}>Close</ThemedText>
         </Pressable>
-      </View>
+      </ThemedView>
     </Modal>
   );
 }
@@ -127,13 +117,13 @@ const styles = StyleSheet.create({
     borderBottomWidth: 1,
     borderBottomColor: '#eee',
   },
-  closeButton: {
+  closePressable: {
     marginTop: 16,
     padding: 10,
-    backgroundColor: '#007BFF',
     borderRadius: 8,
+    backgroundColor: '#007BFF',
   },
-  closeButtonText: {
+  closePressableText: {
     color: '#fff',
     textAlign: 'center',
   },

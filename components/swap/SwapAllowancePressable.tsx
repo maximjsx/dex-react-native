@@ -1,9 +1,8 @@
 import { erc20Abi } from 'viem';
 import { Token } from '@/types/tokenTypes';
-import { Address } from '@/types/swapTypes';
-import { Pressable, StyleSheet, Text } from 'react-native';
 import { useWriteContract, useSimulateContract } from 'wagmi';
 import { MAX_ALLOWANCE, SWAP_PROXY_ADDRESS } from '@/constants';
+import ThemedPressable from '../theme/ThemedPressable';
 
 // `SWAP_PROXY_ADDRESS` contract acts like a proxy between sell token contract and erc20 contract.
 
@@ -15,10 +14,10 @@ type Props = {
   sellToken: Token;
 };
 
-export default function AllowSwapButton({ sellToken }: Props) {
+export default function SwapAllowancePressable({ sellToken }: Props) {
   const simulateContractResult = useSimulateContract({
     abi: erc20Abi,
-    address: sellToken.address as Address,
+    address: sellToken.address,
     functionName: 'approve',
     args: [SWAP_PROXY_ADDRESS, MAX_ALLOWANCE],
   });
@@ -31,24 +30,9 @@ export default function AllowSwapButton({ sellToken }: Props) {
     }
   };
 
-  console.log('writeContractResult', writeContractResult.data);
-
   return (
-    <Pressable style={styles.button} onPress={handleAllowSwap}>
-      <Text style={styles.text}>Allow {sellToken.symbol} for swap</Text>
-    </Pressable>
+    <ThemedPressable onPress={handleAllowSwap}>
+      Allow {sellToken.symbol} for swap
+    </ThemedPressable>
   );
 }
-
-const styles = StyleSheet.create({
-  button: {
-    padding: 12,
-    backgroundColor: '#000',
-    borderRadius: 8,
-  },
-  text: {
-    fontSize: 14,
-    color: '#fff',
-    textAlign: 'center',
-  },
-});

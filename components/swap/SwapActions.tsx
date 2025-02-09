@@ -1,11 +1,11 @@
 import { Token } from '@/types/tokenTypes';
 import { Address } from '@/types/swapTypes';
 import { erc20Abi, parseUnits } from 'viem';
-import AllowSwapButton from './AllowSwapButton';
-import { useBalance, useReadContract } from 'wagmi';
-import { Pressable, StyleSheet, Text, View } from 'react-native';
+import { StyleSheet } from 'react-native';
+import SwapAllowancePressable from './SwapAllowancePressable';
 import { NATIVE_TOKEN_ADDRESS, SWAP_PROXY_ADDRESS } from '@/constants';
-import { Link } from 'expo-router';
+import ThemedPressable from '../theme/ThemedPressable';
+import { useBalance, useReadContract } from 'wagmi';
 
 type Props = {
   sellToken: Token;
@@ -13,7 +13,7 @@ type Props = {
   walletAddress: Address;
 };
 
-export default function SwapButton({
+export default function SwapActions({
   sellToken,
   sellAmount,
   walletAddress,
@@ -22,7 +22,7 @@ export default function SwapButton({
   // Retunrns `0n` if no allowance
   const readContractResult = useReadContract({
     abi: erc20Abi,
-    address: sellToken.address as Address,
+    address: sellToken.address,
     functionName: 'allowance',
     args: [walletAddress, SWAP_PROXY_ADDRESS],
   });
@@ -34,7 +34,7 @@ export default function SwapButton({
   const balanceResult = useBalance({
     address: walletAddress,
     // Do not pass `sellTokenAddress` if it's a chain native token.
-    ...(isNativeToken ? {} : { token: sellToken.address as Address }),
+    ...(isNativeToken ? {} : { token: sellToken.address }),
   });
 
   const walletBalanceValue = balanceResult.data?.value;
@@ -56,22 +56,18 @@ export default function SwapButton({
 
   if (!enoughWalletBalance) {
     return (
-      <Pressable style={styles.button}>
-        <Text style={styles.text}>Insufficient {sellToken.symbol} balance</Text>
-      </Pressable>
+      <ThemedPressable disabled={true}>
+        Insufficient {sellToken.symbol} balance
+      </ThemedPressable>
     );
   }
 
   if (allowedToSwap) {
-    return (
-      <Link href='/order' style={styles.button}>
-        <Text style={styles.text}>Swap</Text>
-      </Link>
-    );
+    return <ThemedPressable href='/order'>Swap</ThemedPressable>;
   }
 
   if (needsApprove) {
-    return <AllowSwapButton sellToken={sellToken} />;
+    return <SwapAllowancePressable sellToken={sellToken} />;
   }
 
   return null;

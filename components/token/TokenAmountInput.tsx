@@ -6,8 +6,8 @@ import {
 import React from 'react';
 import { SwapType } from '@/types/swapTypes';
 import { formatTokenValue } from '@/utils/swapUtils';
-import { TextInput, StyleSheet, View } from 'react-native';
-import ContentLoader, { Rect } from 'react-content-loader/native';
+import { TextInput, StyleSheet } from 'react-native';
+import FieldLoader from '../ui/FieldLoader';
 
 type Props = {
   type: SwapType;
@@ -43,20 +43,7 @@ export default function TokenAmountInput({
   };
 
   if (isLoading && !isSellType) {
-    return (
-      <View style={styles.loader}>
-        <ContentLoader
-          speed={1}
-          width={100}
-          height={36}
-          viewBox='0 0 100 36'
-          backgroundColor='#f3f3f3'
-          foregroundColor='#fff'
-        >
-          <Rect x='0' y='0' rx='8' ry='8' width='100%' height='36' />
-        </ContentLoader>
-      </View>
-    );
+    return <FieldLoader borderRadius={12} />;
   }
 
   return (
@@ -71,14 +58,9 @@ export default function TokenAmountInput({
 }
 
 const styles = StyleSheet.create({
-  loader: {
-    flexDirection: 'row',
-    alignItems: 'center',
-  },
   input: {
     height: 45,
     fontSize: 20,
     fontWeight: '500',
-    color: '#333',
   },
 });

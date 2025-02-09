@@ -1,8 +1,8 @@
-import { ThemedText } from './ThemedText';
 import { SwapType } from '@/types/swapTypes';
 import Ionicons from '@expo/vector-icons/Ionicons';
 import { Image, Pressable, StyleSheet } from 'react-native';
 import { useOpenTokenListByType, useTokenByType } from '@/store/swapStore';
+import { ThemedText } from '../theme/ThemedText';
 
 type Props = {
   type: SwapType;
@@ -17,7 +17,7 @@ export default function TokenSelect({ type }: Props) {
   };
 
   return (
-    <Pressable style={styles.container} onPress={hanldePress}>
+    <Pressable style={styles.pressable} onPress={hanldePress}>
       {token?.logoURI ? (
         <Image
           style={styles.icon}
@@ -34,7 +34,7 @@ export default function TokenSelect({ type }: Props) {
 }
 
 const styles = StyleSheet.create({
-  container: {
+  pressable: {
     flexDirection: 'row',
     alignItems: 'center',
     gap: 10,
@@ -49,6 +49,5 @@ const styles = StyleSheet.create({
   symbol: {
     fontSize: 16,
     fontWeight: '600',
-    color: '#333',
   },
 });

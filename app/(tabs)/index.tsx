@@ -1,50 +1,47 @@
-import React from 'react';
 import { useAccount } from 'wagmi';
-import { ThemedText } from '@/components/ThemedText';
+import { StatusColors } from '@/constants/Colors';
 import { StyleSheet, View, Image } from 'react-native';
+import { ThemedText } from '@/components/theme/ThemedText';
+import { ThemedView } from '@/components/theme/ThemedView';
 import { AppKitButton, useWalletInfo } from '@reown/appkit-wagmi-react-native';
 
 export default function HomeScreen() {
   const { walletInfo } = useWalletInfo();
   const account = useAccount();
 
-  let statusIndicator = '';
+  let borderColor = StatusColors.default;
 
   switch (account.status) {
     case 'connected':
-      statusIndicator = '🟢';
+      borderColor = StatusColors.connected;
       break;
     case 'reconnecting':
-      statusIndicator = '🟡';
+      borderColor = StatusColors.connecting;
       break;
     default:
-      statusIndicator = '';
+      borderColor = StatusColors.default;
   }
 
   return (
-    <View style={styles.container}>
+    <ThemedView style={styles.container}>
       {walletInfo?.name ? (
-        <ThemedText style={styles.title} type='title'>
-          {walletInfo.name}
-        </ThemedText>
+        <ThemedText type='title'>{walletInfo.name}</ThemedText>
       ) : null}
 
       {walletInfo?.icon ? (
-        <Image
-          source={{ uri: walletInfo.icon }}
-          style={styles.icon}
-          resizeMode='contain'
-        />
+        <View style={[styles.iconContainer, { borderColor }]}>
+          <Image
+            source={{ uri: walletInfo.icon }}
+            style={styles.icon}
+            resizeMode='contain'
+          />
+        </View>
       ) : null}
-
-      <ThemedText>
-        Status: {account.status} {statusIndicator}
-      </ThemedText>
 
       <View style={styles.buttonContainer}>
         <AppKitButton />
       </View>
-    </View>
+    </ThemedView>
   );
 }
 
@@ -55,30 +52,27 @@ const styles = StyleSheet.create({
     padding: 16,
     alignItems: 'center',
     justifyContent: 'center',
-  },
-  title: {
-    marginTop: 48,
-    marginBottom: 16,
-    fontSize: 24,
-    fontWeight: 'bold',
+    gap: 10,
   },
   buttonContainer: {
-    width: '100%',
+    marginTop: 12,
+    borderRadius: 8,
+    paddingVertical: 4,
     paddingHorizontal: 16,
+    backgroundColor: '#000',
+  },
+  iconContainer: {
+    width: 70,
+    height: 70,
+    borderRadius: 35,
+    borderWidth: 3,
+    backgroundColor: '#000',
+    alignItems: 'center',
+    justifyContent: 'center',
   },
   icon: {
     width: 50,
     height: 50,
-    marginBottom: 16,
-  },
-  description: {
-    textAlign: 'center',
-    fontSize: 16,
-    marginBottom: 16,
-  },
-  link: {
-    color: '#007BFF',
-    textDecorationLine: 'underline',
-    marginBottom: 32,
+    borderRadius: 25,
   },
 });

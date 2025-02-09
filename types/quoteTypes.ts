@@ -1,3 +1,5 @@
+import { Address } from './swapTypes';
+
 export type SwapQuoteApiPayload = {
   chainId: number;
   buyToken: string;
@@ -133,8 +135,8 @@ export interface SellToken {
 }
 
 export interface Transaction {
-  to: string;
-  data: string;
+  to: Address;
+  data: Address;
   gas: string;
   gasPrice: string;
   value: string;

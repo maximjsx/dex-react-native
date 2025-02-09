@@ -5,13 +5,9 @@ import { getTokens } from '@/apis/tokenApis';
 export default function useGetTokens() {
   const account = useAccount();
 
-  const priceQueryParams = {
-    chainId: account.chainId as number,
-  };
-
   return useQuery({
-    queryKey: ['tokensList', priceQueryParams],
-    queryFn: () => getTokens({ chainId: account.chainId as number }),
-    enabled: !!priceQueryParams.chainId,
+    queryKey: ['tokenList', account.chainId],
+    queryFn: () => getTokens({ chainId: account.chainId }),
+    enabled: !!account.chainId,
   });
 }

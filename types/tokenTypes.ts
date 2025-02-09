@@ -1,5 +1,7 @@
+import { Address } from './swapTypes';
+
 export type Token = {
-  address: string;
+  address: Address;
   chainId: number;
   decimals: number;
   eip2612: boolean;
@@ -17,9 +19,5 @@ export type TokenObject = {
 
 export interface Tokens {
   defaultPair: TokenObject[];
-  list: TokenObject[];
-}
-
-export interface TokensList {
   list: TokenObject[];
 }

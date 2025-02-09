@@ -1,49 +1,90 @@
-import OrderButton from '@/components/OrderButton';
-import OrderToken from '@/components/OrderToken';
+import { useAccount } from 'wagmi';
+import { StyleSheet } from 'react-native';
+import OrderActions from '@/components/order/OrderActions';
+import OrderToken from '@/components/order/OrderToken';
+import { ThemedText } from '@/components/theme/ThemedText';
+import { ThemedView } from '@/components/theme/ThemedView';
 import useGetSwapQuote from '@/hooks/useGetSwapQuote';
-import { StyleSheet, Text, View } from 'react-native';
+import { formatTokenValue } from '@/utils/swapUtils';
+import FieldLoader from '@/components/ui/FieldLoader';
+import SwapDirectionIndicator from '@/components/swap/SwapDirectionIndicator';
 
 export default function OrderScreen() {
   const quote = useGetSwapQuote();
+  const account = useAccount();
 
   const { buyAmount, sellAmount, liquidityAvailable, transaction } =
     quote.data || {};
 
+  const nativeCurrency = account.chain?.nativeCurrency;
+
+  const totalNetworkFee =
+    nativeCurrency && quote.data?.totalNetworkFee
+      ? formatTokenValue(
+          BigInt(quote.data.totalNetworkFee),
+          nativeCurrency.decimals
+        )
+      : null;
+
   return (
-    <View style={styles.container}>
-      <View>
+    <ThemedView style={styles.container}>
+      <ThemedView style={styles.box}>
         <OrderToken
           type='sell'
           amount={sellAmount}
           isLoading={quote.isLoading}
         />
+        <SwapDirectionIndicator />
         <OrderToken type='buy' amount={buyAmount} isLoading={quote.isLoading} />
-      </View>
-      <View style={styles.info}>
-        <Text>
-          Liquidity status: {liquidityAvailable ? 'Available' : 'Not Available'}
-        </Text>
-        <Text>Gas price: {transaction?.gasPrice || '-'}</Text>
-      </View>
+      </ThemedView>
+      <ThemedView style={styles.info}>
+        {quote.isLoading ? (
+          <FieldLoader width={200} height={20} />
+        ) : (
+          <ThemedText>
+            Liquidity status:{' '}
+            {liquidityAvailable ? 'Available' : 'Not Available'}
+          </ThemedText>
+        )}
+
+        {quote.isLoading ? (
+          <FieldLoader width={200} height={20} />
+        ) : (
+          <ThemedText>
+            Total network fee:{' '}
+            {nativeCurrency && totalNetworkFee ? (
+              <>
+                {totalNetworkFee} {nativeCurrency.symbol}
+              </>
+            ) : (
+              'Not able to calculate'
+            )}
+          </ThemedText>
+        )}
+      </ThemedView>
+
       {transaction ? (
-        <OrderButton transaction={transaction} />
+        <OrderActions transaction={transaction} />
       ) : (
-        <Text>Getting quotes</Text>
+        <ThemedText>Getting quotes</ThemedText>
       )}
-    </View>
+    </ThemedView>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
     height: '100%',
-    backgroundColor: '#fff',
     flexDirection: 'column',
     justifyContent: 'center',
     padding: 16,
   },
+  box: {
+    gap: 10,
+  },
   info: {
     marginTop: 12,
     marginBottom: 12,
+    gap: 4,
   },
 });

@@ -1,5 +1,6 @@
-import { StyleSheet, TextInput, View } from 'react-native';
+import { StyleSheet, TextInput } from 'react-native';
 import Ionicons from '@expo/vector-icons/Ionicons';
+import { ThemedView } from '../theme/ThemedView';
 
 type Props = {
   query: string;
@@ -8,7 +9,7 @@ type Props = {
 
 export default function TokenSearch({ query, onChange }: Props) {
   return (
-    <View style={styles.container}>
+    <ThemedView style={styles.container}>
       <TextInput
         value={query}
         style={styles.input}
@@ -16,7 +17,7 @@ export default function TokenSearch({ query, onChange }: Props) {
         placeholder='Search by symbol or name...'
       />
       <Ionicons name='search-outline' size={20} color='grey' />
-    </View>
+    </ThemedView>
   );
 }
 

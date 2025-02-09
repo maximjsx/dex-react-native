@@ -1,7 +1,7 @@
 import Ionicons from '@expo/vector-icons/Ionicons';
 import { Pressable, StyleSheet } from 'react-native';
 
-export default function RevertButton() {
+export default function SwapDirectionIndicator() {
   return (
     <Pressable style={styles.button}>
       <Ionicons name='arrow-down' size={20} color='grey' />

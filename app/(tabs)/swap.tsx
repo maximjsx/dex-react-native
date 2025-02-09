@@ -1,22 +1,22 @@
-import SwapInfo from '@/components/SwapInfo';
-import { StyleSheet, View } from 'react-native';
-import TokenListModal from '@/components/TokenListModal';
-import SwapButtonWrapper from '@/components/SwapButtonWrapper';
+import { StyleSheet } from 'react-native';
+import SwapInfo from '@/components/swap/SwapInfo';
+import SwapActionsWrapper from '@/components/swap/SwapActionsWrapper';
+import TokenListModal from '@/components/token/TokenListModal';
+import { ThemedView } from '@/components/theme/ThemedView';
 
 export default function SwapScreen() {
   return (
-    <View style={styles.container}>
+    <ThemedView style={styles.container}>
       <SwapInfo />
-      <SwapButtonWrapper />
+      <SwapActionsWrapper />
       <TokenListModal />
-    </View>
+    </ThemedView>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
     height: '100%',
-    backgroundColor: '#fff',
     flexDirection: 'column',
     justifyContent: 'center',
     padding: 16,
