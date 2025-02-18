@@ -1,5 +1,3 @@
-import { StyleSheet } from 'react-native';
-import { ThemedView } from '../theme/ThemedView';
 import ContentLoader, { Rect } from 'react-content-loader/native';
 
 type Props = {

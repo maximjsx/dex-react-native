@@ -3,13 +3,20 @@ import {
   useSetTokenByType,
   useOpenTokenListByType,
 } from '@/store/swapStore';
+import {
+  Modal,
+  Image,
+  FlatList,
+  Pressable,
+  StyleSheet,
+  TouchableWithoutFeedback,
+} from 'react-native';
 import { useState } from 'react';
 import TokenSearch from './TokenSearch';
 import { Token } from '@/types/tokenTypes';
 import { ThemedText } from '../theme/ThemedText';
 import { ThemedView } from '../theme/ThemedView';
 import useInitTokenList from '@/hooks/useInitTokenList';
-import { Modal, Image, FlatList, Pressable, StyleSheet } from 'react-native';
 
 const ITEM_HEIGHT = 70;
 
@@ -56,17 +63,19 @@ export default function TokenListModal() {
           data={filteredData}
           keyExtractor={(item) => item.address}
           renderItem={({ item }) => (
-            <Pressable style={styles.option} onPress={() => handleSelect(item)}>
-              <ThemedView style={styles.rowContainer}>
-                <Image
-                  style={styles.icon}
-                  resizeMode='contain'
-                  source={{ uri: item.logoURI || '' }}
-                />
-                <ThemedText style={styles.symbol}>{item.symbol}</ThemedText>
-                <ThemedText style={styles.name}>{item.name}</ThemedText>
+            <TouchableWithoutFeedback onPress={() => handleSelect(item)}>
+              <ThemedView style={styles.option}>
+                <ThemedView style={styles.rowContainer}>
+                  <Image
+                    style={styles.icon}
+                    resizeMode='contain'
+                    source={{ uri: item.logoURI || '' }}
+                  />
+                  <ThemedText style={styles.symbol}>{item.symbol}</ThemedText>
+                  <ThemedText style={styles.name}>{item.name}</ThemedText>
+                </ThemedView>
               </ThemedView>
-            </Pressable>
+            </TouchableWithoutFeedback>
           )}
           initialNumToRender={10}
           maxToRenderPerBatch={10}

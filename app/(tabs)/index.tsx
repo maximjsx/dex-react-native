@@ -26,7 +26,9 @@ export default function HomeScreen() {
     <ThemedView style={styles.container}>
       {walletInfo?.name ? (
         <ThemedText type='title'>{walletInfo.name}</ThemedText>
-      ) : null}
+      ) : (
+        <ThemedText type='title'>Connect Wallet</ThemedText>
+      )}
 
       {walletInfo?.icon ? (
         <View style={[styles.iconContainer, { borderColor }]}>
@@ -38,9 +40,10 @@ export default function HomeScreen() {
         </View>
       ) : null}
 
-      <View style={styles.buttonContainer}>
-        <AppKitButton />
-      </View>
+      <AppKitButton
+        connectStyle={styles.walletButton}
+        accountStyle={styles.walletButton}
+      />
     </ThemedView>
   );
 }
@@ -54,7 +57,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     gap: 10,
   },
-  buttonContainer: {
+  walletButton: {
     marginTop: 12,
     borderRadius: 8,
     paddingVertical: 4,

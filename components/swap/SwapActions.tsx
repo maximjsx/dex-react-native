@@ -1,11 +1,10 @@
 import { Token } from '@/types/tokenTypes';
 import { Address } from '@/types/swapTypes';
 import { erc20Abi, parseUnits } from 'viem';
-import { StyleSheet } from 'react-native';
+import { useBalance, useReadContract } from 'wagmi';
+import ThemedPressable from '../theme/ThemedPressable';
 import SwapAllowancePressable from './SwapAllowancePressable';
 import { NATIVE_TOKEN_ADDRESS, SWAP_PROXY_ADDRESS } from '@/constants';
-import ThemedPressable from '../theme/ThemedPressable';
-import { useBalance, useReadContract } from 'wagmi';
 
 type Props = {
   sellToken: Token;
@@ -72,16 +71,3 @@ export default function SwapActions({
 
   return null;
 }
-
-const styles = StyleSheet.create({
-  button: {
-    padding: 12,
-    backgroundColor: '#000',
-    borderRadius: 8,
-  },
-  text: {
-    fontSize: 14,
-    color: '#fff',
-    textAlign: 'center',
-  },
-});

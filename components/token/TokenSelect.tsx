@@ -1,8 +1,9 @@
 import { SwapType } from '@/types/swapTypes';
+import { ThemedText } from '../theme/ThemedText';
+import { ThemedView } from '../theme/ThemedView';
 import Ionicons from '@expo/vector-icons/Ionicons';
 import { Image, Pressable, StyleSheet } from 'react-native';
 import { useOpenTokenListByType, useTokenByType } from '@/store/swapStore';
-import { ThemedText } from '../theme/ThemedText';
 
 type Props = {
   type: SwapType;
@@ -26,7 +27,9 @@ export default function TokenSelect({ type }: Props) {
             uri: token?.logoURI,
           }}
         />
-      ) : null}
+      ) : (
+        <ThemedView style={styles.placeholder} />
+      )}
       <ThemedText style={styles.symbol}>{token?.symbol || ''}</ThemedText>
       <Ionicons name='chevron-down' size={20} color='grey' />
     </Pressable>
@@ -49,5 +52,11 @@ const styles = StyleSheet.create({
   symbol: {
     fontSize: 16,
     fontWeight: '600',
+  },
+  placeholder: {
+    width: 25,
+    height: 25,
+    borderRadius: '50%',
+    backgroundColor: '#f4f4f5',
   },
 });

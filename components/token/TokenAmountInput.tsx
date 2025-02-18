@@ -4,10 +4,10 @@ import {
   useSetSellAmount,
 } from '@/store/swapStore';
 import React from 'react';
-import { SwapType } from '@/types/swapTypes';
-import { formatTokenValue } from '@/utils/swapUtils';
-import { TextInput, StyleSheet } from 'react-native';
 import FieldLoader from '../ui/FieldLoader';
+import { SwapType } from '@/types/swapTypes';
+import { TextInput, StyleSheet } from 'react-native';
+import { formatTokenValue, sanitizeInput } from '@/utils/swapUtils';
 
 type Props = {
   type: SwapType;
@@ -31,14 +31,9 @@ export default function TokenAmountInput({
       ? formatTokenValue(BigInt(buyAmount), token.decimals)
       : buyAmount;
 
-  const handleInputChange = (input: string) => {
+  const handleInputChange = (value: string) => {
     if (isSellType) {
-      // Allow only numbers and one dot
-      const sanitizedInput = input
-        .replace(/[^0-9.]/g, '')
-        .replace(/(\..*)\./g, '$1');
-
-      setSellAmount(sanitizedInput);
+      setSellAmount(sanitizeInput(value));
     }
   };
 

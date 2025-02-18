@@ -1,12 +1,12 @@
 import { useAccount } from 'wagmi';
 import { StyleSheet } from 'react-native';
-import OrderActions from '@/components/order/OrderActions';
+import { formatTokenValue } from '@/utils/swapUtils';
+import useGetSwapQuote from '@/hooks/useGetSwapQuote';
+import FieldLoader from '@/components/ui/FieldLoader';
 import OrderToken from '@/components/order/OrderToken';
 import { ThemedText } from '@/components/theme/ThemedText';
 import { ThemedView } from '@/components/theme/ThemedView';
-import useGetSwapQuote from '@/hooks/useGetSwapQuote';
-import { formatTokenValue } from '@/utils/swapUtils';
-import FieldLoader from '@/components/ui/FieldLoader';
+import OrderActions from '@/components/order/OrderActions';
 import SwapDirectionIndicator from '@/components/swap/SwapDirectionIndicator';
 
 export default function OrderScreen() {
@@ -37,6 +37,7 @@ export default function OrderScreen() {
         <SwapDirectionIndicator />
         <OrderToken type='buy' amount={buyAmount} isLoading={quote.isLoading} />
       </ThemedView>
+
       <ThemedView style={styles.info}>
         {quote.isLoading ? (
           <FieldLoader width={200} height={20} />

@@ -1,10 +1,10 @@
 import { useAccount } from 'wagmi';
-import { useEffect, useMemo, useState } from 'react';
-import { useSetDefaultTokens } from '@/store/swapStore';
-import ethTokensData from '../data/ethTokensData.json';
-import polTokensData from '../data/polTokensData.json';
 import { Token } from '@/types/tokenTypes';
 import { CHAIN_LIST } from '@/constants/Chains';
+import { useEffect, useMemo, useState } from 'react';
+import ethTokensData from '../data/ethTokensData.json';
+import polTokensData from '../data/polTokensData.json';
+import { useSetDefaultTokens } from '@/store/swapStore';
 
 export default function useInitTokenList() {
   const account = useAccount();

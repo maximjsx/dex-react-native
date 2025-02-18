@@ -1,7 +1,7 @@
 import { useAccount } from 'wagmi';
 import SwapActions from './SwapActions';
-import { useSellAmount, useTokenByType } from '@/store/swapStore';
 import ThemedPressable from '../theme/ThemedPressable';
+import { useSellAmount, useTokenByType } from '@/store/swapStore';
 
 export default function SwapActionsWrapper() {
   const sellToken = useTokenByType('sell');

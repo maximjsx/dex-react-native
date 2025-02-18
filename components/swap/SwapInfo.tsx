@@ -1,13 +1,13 @@
 import { Fragment } from 'react';
 import TokenBox from '../token/TokenBox';
 import { StyleSheet } from 'react-native';
+import FieldLoader from '../ui/FieldLoader';
 import { useAccount, useBalance } from 'wagmi';
 import { ThemedText } from '../theme/ThemedText';
 import { ThemedView } from '../theme/ThemedView';
 import { formatTokenValue } from '@/utils/swapUtils';
 import useGetSwapPrice from '@/hooks/useGetSwapPrice';
 import SwapDirectionIndicator from './SwapDirectionIndicator';
-import FieldLoader from '../ui/FieldLoader';
 
 export default function SwapInfo() {
   const account = useAccount();

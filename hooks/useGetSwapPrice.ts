@@ -1,6 +1,6 @@
-import { Config, UseAccountReturnType } from 'wagmi';
 import { getSwapPrice } from '@/apis/swapApis';
 import { useQuery } from '@tanstack/react-query';
+import { Config, UseAccountReturnType } from 'wagmi';
 import { formatToBaseUnits } from '@/utils/swapUtils';
 import { useBuyToken, useSellToken, useSellAmount } from '@/store/swapStore';
 

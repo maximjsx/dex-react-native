@@ -1,6 +1,6 @@
 import { useAccount } from 'wagmi';
-import { useQuery } from '@tanstack/react-query';
 import { getTokens } from '@/apis/tokenApis';
+import { useQuery } from '@tanstack/react-query';
 
 export default function useGetTokens() {
   const account = useAccount();

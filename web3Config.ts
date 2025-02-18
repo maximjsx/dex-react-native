@@ -1,5 +1,5 @@
-import { defaultWagmiConfig } from '@reown/appkit-wagmi-react-native';
 import { mainnet, polygon, arbitrum } from '@wagmi/core/chains';
+import { defaultWagmiConfig } from '@reown/appkit-wagmi-react-native';
 
 export const REOWN_PROJECT_ID = process.env.EXPO_PUBLIC_REOWN_PROJECT_ID || '';
 
@@ -18,6 +18,6 @@ const chains = [mainnet, polygon, arbitrum] as const;
 
 export const wagmiConfig = defaultWagmiConfig({
   chains,
-  projectId: REOWN_PROJECT_ID,
   metadata,
+  projectId: REOWN_PROJECT_ID,
 });
